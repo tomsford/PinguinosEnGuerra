@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Sprites/punto.png" type="Texture" id=1]
+
+[node name="punto_trayectoria" type="Sprite"]
+scale = Vector2( 0.720529, 0.65132 )
+texture = ExtResource( 1 )

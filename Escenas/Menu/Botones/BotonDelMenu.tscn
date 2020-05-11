@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://fuentes/Fuentee.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/BotonDelMenu.gd" type="Script" id=2]
+
+
+
+[node name="MenuDelBoton" type="Button"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -265.0
+margin_right = 265.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 360, 90 )
+rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 360, 90 )
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.054902, 0.313726, 0.415686, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 5
+text = "MENU DEL BOTON"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
