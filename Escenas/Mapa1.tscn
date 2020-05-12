@@ -7,8 +7,6 @@
 [ext_resource path="res://Recursos/images/tile_06.png" type="Texture" id=5]
 [ext_resource path="res://fuentes/Fuentee.tres" type="DynamicFont" id=6]
 
-
-
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 

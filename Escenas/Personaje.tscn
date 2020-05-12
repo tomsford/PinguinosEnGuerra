@@ -10,7 +10,6 @@ height = 71.26
 [sub_resource type="Animation" id=2]
 resource_name = "Nueva Animación"
 length = 0.4
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -41,7 +40,7 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( -412.055, 1.44229e+09 )
+position = Vector2( -183.722, 2.20026e+09 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

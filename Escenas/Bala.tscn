@@ -8,8 +8,10 @@ radius = 8.5
 height = 10.2736
 
 [node name="Bala" type="RigidBody2D"]
+visible = false
 position = Vector2( 346.486, 196.734 )
 collision_layer = 2
+gravity_scale = 0.0
 contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 2 )
