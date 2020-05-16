@@ -1,0 +1,131 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Recursos/pinguinos/PinguinoFrente/PinguinoFrenteGris.png" type="Texture" id=1]
+[ext_resource path="res://Recursos/pinguinos/PinguinoFrente/PinguinoFrenteNaranja.png" type="Texture" id=2]
+[ext_resource path="res://fuentes/Fuentee.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Recursos/pinguinos/PinguinoFrente/PinguinoFrenteRosa.png" type="Texture" id=4]
+[ext_resource path="res://Recursos/pinguinos/PinguinoFrente/PinguinoFrenteVerde.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/EscenaSeleccion.gd" type="Script" id=6]
+[ext_resource path="res://Escenas/Menu/Botones/BotonSeleccion.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Escenas/Menu/CambioEscena.tscn" type="PackedScene" id=11]
+
+[node name="EscenaSeleccion" type="Control"]
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1274.0
+margin_bottom = 715.0
+rect_min_size = Vector2( 1280, 720 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 93.0
+
+[node name="Atras" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_right = 100.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 100, 93 )
+custom_fonts/font = ExtResource( 3 )
+text = "ATRAS"
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 104.0
+margin_top = 3.0
+margin_right = 1274.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 1170, 0 )
+custom_fonts/font = ExtResource( 3 )
+text = "SELECCIONA TU PERSONAJE"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 97.0
+margin_right = 1280.0
+margin_bottom = 497.0
+
+[node name="Amarillo" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 7 )]
+margin_right = 315.0
+margin_bottom = 400.0
+icon = ExtResource( 2 )
+scene_to_load = "res://Escenas/Mapa1Amarillo.tscn"
+
+[node name="Rosa" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 7 )]
+margin_left = 319.0
+margin_right = 634.0
+margin_bottom = 400.0
+icon = ExtResource( 4 )
+scene_to_load = "res://Escenas/Mapa1Rosa.tscn"
+
+[node name="Verde" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 7 )]
+margin_left = 638.0
+margin_right = 953.0
+margin_bottom = 400.0
+icon = ExtResource( 5 )
+scene_to_load = "res://Escenas/Mapa1Verde.tscn"
+
+[node name="Gris" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 7 )]
+margin_left = 957.0
+margin_right = 1272.0
+margin_bottom = 400.0
+icon = ExtResource( 1 )
+scene_to_load = "res://Escenas/Mapa1.tscn"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 501.0
+margin_right = 1280.0
+margin_bottom = 716.0
+rect_min_size = Vector2( 1280, 215 )
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+margin_top = 64.0
+margin_right = 309.0
+margin_bottom = 151.0
+custom_fonts/font = ExtResource( 3 )
+text = "DESCRIPCION PERSONAJE"
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer3"]
+margin_left = 313.0
+margin_top = 64.0
+margin_right = 622.0
+margin_bottom = 151.0
+custom_fonts/font = ExtResource( 3 )
+text = "DESCRIPCION PERSONAJE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer3"]
+margin_left = 626.0
+margin_top = 64.0
+margin_right = 935.0
+margin_bottom = 151.0
+custom_fonts/font = ExtResource( 3 )
+text = "DESCRIPCION PERSONAJE"
+
+[node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer3"]
+margin_left = 939.0
+margin_top = 64.0
+margin_right = 1248.0
+margin_bottom = 151.0
+custom_fonts/font = ExtResource( 3 )
+text = "DESCRIPCION PERSONAJE"
+
+[node name="CambioEscena" parent="." instance=ExtResource( 11 )]
+visible = false
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 1280, 720 )
+rect_scale = Vector2( 13.9108, 47.4277 )
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Atras" to="." method="_on_Atras_pressed"]
+[connection signal="fade_finished" from="CambioEscena" to="." method="_on_CambioEscena_fade_finished"]

@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://prueba tiro.gd" type="Script" id=1]
+[ext_resource path="res://triangulo.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/punto.png" type="Texture" id=3]
+
+[node name="Tiro" type="Node2D"]
+position = Vector2( 291.39, 552.318 )
+script = ExtResource( 1 )
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2( 2.796, -1.102 )
+width = 5.0
+default_color = Color( 1, 0, 0.937255, 0.301961 )
+
+[node name="Pivot" type="Position2D" parent="."]
+position = Vector2( 2.79628, -1.10193 )
+rotation = 0.785398
+
+[node name="TextureProgress" type="TextureProgress" parent="Pivot"]
+margin_left = 0.249481
+margin_top = -30.2078
+margin_right = 64.2495
+margin_bottom = 33.7922
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 2 )
+tint_under = Color( 0, 0, 0, 0.301961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+
+[node name="Sprite" type="Sprite" parent="RigidBody2D"]
+texture = ExtResource( 3 )

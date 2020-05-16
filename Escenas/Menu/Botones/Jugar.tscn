@@ -5,7 +5,7 @@
 [node name="Jugar" instance=ExtResource( 1 )]
 margin_left = -263.0
 margin_right = 267.0
-scene_to_load = "res://Escenas/Mapa1.tscn"
+scene_to_load = "res://Escenas/EscenaSeleccion.tscn"
 
 [node name="Label" parent="." index="0"]
 text = "JUGAR"
