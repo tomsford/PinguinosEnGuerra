@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Gameshow.png-26fe957a422e89c90638a1cc869113a3.stex"
+path="res://.import/Spritev1.png-1a3e6366e15d40034e305ee73d23653a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Fuentes/Gameshow.png"
-dest_files=[ "res://.import/Gameshow.png-26fe957a422e89c90638a1cc869113a3.stex" ]
+source_file="res://Sprites/Spritev1.png"
+dest_files=[ "res://.import/Spritev1.png-1a3e6366e15d40034e305ee73d23653a.stex" ]
 
 [params]
 

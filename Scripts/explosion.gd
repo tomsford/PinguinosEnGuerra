@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 var tilemap
-export (int) var explosion_size = 20
+export (int) var explosion_size = 40
 
 func _ready():
 	$CollisionShape2D.shape.radius = explosion_size / 2

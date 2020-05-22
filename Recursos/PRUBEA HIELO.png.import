@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Gameshow.png-26fe957a422e89c90638a1cc869113a3.stex"
+path="res://.import/PRUBEA HIELO.png-f861336df8481bf59eb712e6b235034d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Fuentes/Gameshow.png"
-dest_files=[ "res://.import/Gameshow.png-26fe957a422e89c90638a1cc869113a3.stex" ]
+source_file="res://Recursos/PRUBEA HIELO.png"
+dest_files=[ "res://.import/PRUBEA HIELO.png-f861336df8481bf59eb712e6b235034d.stex" ]
 
 [params]
 

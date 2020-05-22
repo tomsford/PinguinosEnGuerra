@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Gameshow.png-26fe957a422e89c90638a1cc869113a3.stex"
+path="res://.import/Rectangulo2_02.png-3b2cbbf0889f6b76e2d963cd8798239c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Fuentes/Gameshow.png"
-dest_files=[ "res://.import/Gameshow.png-26fe957a422e89c90638a1cc869113a3.stex" ]
+source_file="res://Recursos/TileMap2/Rectangulo2/Rectangulo2_02.png"
+dest_files=[ "res://.import/Rectangulo2_02.png-3b2cbbf0889f6b76e2d963cd8798239c.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Gameshow.png-26fe957a422e89c90638a1cc869113a3.stex"
+path="res://.import/Fondo1.jpg-5d39a940d6ce91beca3ca71b33f8d803.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Fuentes/Gameshow.png"
-dest_files=[ "res://.import/Gameshow.png-26fe957a422e89c90638a1cc869113a3.stex" ]
+source_file="res://Recursos/fondos/Fondo1.jpg"
+dest_files=[ "res://.import/Fondo1.jpg-5d39a940d6ce91beca3ca71b33f8d803.stex" ]
 
 [params]
 

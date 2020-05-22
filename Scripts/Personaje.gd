@@ -7,11 +7,14 @@ const grav= Vector2(0,-1)
 var caminar= true
 var disparo  = false
 var cooldown = false
+var cayo = false
 
 var bala = load("res://Escenas/Bala.tscn")
 
 func _physics_process(delta):
-
+	if !cayo:
+		$AnimationPlayer.play("Caer")
+		cayo = true
 	if Input.is_action_pressed("ui_right") and caminar:
 		posicao.x = 100
 		#$ para llamar un nodo children
@@ -28,7 +31,7 @@ func _physics_process(delta):
 	posicao.y += gravity
 	if Input.is_action_just_pressed("ui_up") and caminar:
 		if(is_on_floor()):
-			posicao.y = -500
+			posicao.y = -350
 	if Input.is_action_just_pressed("sacararma") and caminar and !disparo:
 
 		$AnimationPlayer.play("sacarEscopeta")

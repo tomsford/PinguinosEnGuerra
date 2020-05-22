@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Gameshow.png-26fe957a422e89c90638a1cc869113a3.stex"
+path="res://.import/animacionsacararma.png-ab9f2c5e57ab8399637851c8da59bbbc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Fuentes/Gameshow.png"
-dest_files=[ "res://.import/Gameshow.png-26fe957a422e89c90638a1cc869113a3.stex" ]
+source_file="res://Recursos/armas/animacionsacararma.png"
+dest_files=[ "res://.import/animacionsacararma.png-ab9f2c5e57ab8399637851c8da59bbbc.stex" ]
 
 [params]
 

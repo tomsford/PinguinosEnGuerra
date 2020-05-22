@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Gameshow.png-26fe957a422e89c90638a1cc869113a3.stex"
+path="res://.import/PinguinoFrenteNaranja.png-117cf34b1b978e6cbfeba54234fdbd98.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Fuentes/Gameshow.png"
-dest_files=[ "res://.import/Gameshow.png-26fe957a422e89c90638a1cc869113a3.stex" ]
+source_file="res://Recursos/pinguinos/PinguinoFrente/PinguinoFrenteNaranja.png"
+dest_files=[ "res://.import/PinguinoFrenteNaranja.png-117cf34b1b978e6cbfeba54234fdbd98.stex" ]
 
 [params]
 

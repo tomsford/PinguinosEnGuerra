@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Gameshow.png-26fe957a422e89c90638a1cc869113a3.stex"
+path="res://.import/TileMap2_05.png-0dfab91b8d813a58740799110496f80c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Fuentes/Gameshow.png"
-dest_files=[ "res://.import/Gameshow.png-26fe957a422e89c90638a1cc869113a3.stex" ]
+source_file="res://Recursos/TileMap2/Cuadrado/TileMap2_05.png"
+dest_files=[ "res://.import/TileMap2_05.png-0dfab91b8d813a58740799110496f80c.stex" ]
 
 [params]
 
