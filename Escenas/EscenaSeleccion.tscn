@@ -26,21 +26,21 @@ __meta__ = {
 }
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 1280.0
-margin_bottom = 93.0
+margin_right = 1932.0
+margin_bottom = 106.0
 
 [node name="Atras" type="Button" parent="VBoxContainer/HBoxContainer2"]
-margin_right = 100.0
-margin_bottom = 93.0
+margin_right = 136.0
+margin_bottom = 106.0
 rect_min_size = Vector2( 100, 93 )
 custom_fonts/font = ExtResource( 3 )
 text = "ATRAS"
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
-margin_left = 104.0
+margin_left = 140.0
 margin_top = 3.0
-margin_right = 1274.0
-margin_bottom = 90.0
+margin_right = 1310.0
+margin_bottom = 103.0
 rect_min_size = Vector2( 1170, 0 )
 custom_fonts/font = ExtResource( 3 )
 text = "SELECCIONA TU PERSONAJE"
@@ -50,9 +50,9 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 97.0
-margin_right = 1280.0
-margin_bottom = 497.0
+margin_top = 110.0
+margin_right = 1932.0
+margin_bottom = 510.0
 
 [node name="Amarillo" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 7 )]
 margin_right = 315.0
@@ -82,23 +82,23 @@ icon = ExtResource( 1 )
 scene_to_load = "res://Escenas/Mapa1.tscn"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 501.0
-margin_right = 1280.0
-margin_bottom = 716.0
+margin_top = 514.0
+margin_right = 1932.0
+margin_bottom = 729.0
 rect_min_size = Vector2( 1280, 215 )
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
-margin_top = 64.0
-margin_right = 309.0
-margin_bottom = 151.0
+margin_top = 57.0
+margin_right = 480.0
+margin_bottom = 157.0
 custom_fonts/font = ExtResource( 3 )
 text = "DESCRIPCION PERSONAJE"
 
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer3"]
-margin_left = 313.0
-margin_top = 64.0
-margin_right = 622.0
-margin_bottom = 151.0
+margin_left = 484.0
+margin_top = 57.0
+margin_right = 964.0
+margin_bottom = 157.0
 custom_fonts/font = ExtResource( 3 )
 text = "DESCRIPCION PERSONAJE"
 __meta__ = {
@@ -106,18 +106,18 @@ __meta__ = {
 }
 
 [node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer3"]
-margin_left = 626.0
-margin_top = 64.0
-margin_right = 935.0
-margin_bottom = 151.0
+margin_left = 968.0
+margin_top = 57.0
+margin_right = 1448.0
+margin_bottom = 157.0
 custom_fonts/font = ExtResource( 3 )
 text = "DESCRIPCION PERSONAJE"
 
 [node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer3"]
-margin_left = 939.0
-margin_top = 64.0
-margin_right = 1248.0
-margin_bottom = 151.0
+margin_left = 1452.0
+margin_top = 57.0
+margin_right = 1932.0
+margin_bottom = 157.0
 custom_fonts/font = ExtResource( 3 )
 text = "DESCRIPCION PERSONAJE"
 

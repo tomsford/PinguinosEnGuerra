@@ -8,6 +8,7 @@ var caminar= true
 var disparo  = false
 var cooldown = false
 var cayo = false
+var flipeo = 10
 
 var bala = load("res://Escenas/Bala.tscn")
 
@@ -19,11 +20,13 @@ func _physics_process(delta):
 		posicao.x = 100
 		#$ para llamar un nodo children
 		$Sprite.scale.x = 0.22
+		flipeo = 10
 
 		$AnimationPlayer.play("Nueva Animación")
 	elif Input.is_action_pressed("ui_left") and caminar:
 		posicao.x = -100
 		$Sprite.scale.x = -0.22
+		flipeo = -100
 
 		$AnimationPlayer.play("Nueva Animación")
 	else:
@@ -42,7 +45,7 @@ func _physics_process(delta):
 			cooldown = true
 			$explosion_cooldown.start()
 			var newBala = bala.instance()
-			newBala.position= $Pos_Bala.global_position
+			newBala.position= $Pos_Bala.global_position + Vector2(flipeo,0)
 			get_parent().add_child(newBala)
 	#Esto mas adelante no va a pasar nunca, ya que despues de disparar cambiaria el turno o habria otra senal que le deje caminar
 	elif  Input.is_action_just_pressed("sacararma") and !caminar:

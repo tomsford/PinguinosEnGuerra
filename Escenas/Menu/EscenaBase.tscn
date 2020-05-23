@@ -3,7 +3,6 @@
 [ext_resource path="res://fuentes/Fuentee.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/volver_atras.gd" type="Script" id=2]
 
-
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,22 +19,22 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 483.0
-margin_top = 283.0
-margin_right = 796.0
-margin_bottom = 437.0
+margin_left = 548.0
+margin_top = 268.0
+margin_right = 732.0
+margin_bottom = 452.0
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 313.0
-margin_bottom = 72.0
+margin_right = 184.0
+margin_bottom = 87.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.247059, 0.592157, 0.741176, 1 )
 text = "ESCENA JUGAR"
 
 [node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 76.0
-margin_right = 313.0
-margin_bottom = 154.0
+margin_top = 91.0
+margin_right = 184.0
+margin_bottom = 184.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 0 )
 custom_colors/font_color = Color( 0.247059, 0.592157, 0.741176, 1 )

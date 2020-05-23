@@ -44,9 +44,6 @@ func mover():
 		if contacto:
 			$Line2D.points = []
 		
-		
-		
-
 
 func _physics_process(delta):
 	if !ver:
@@ -68,8 +65,6 @@ func calculate_trajectory():
 	
 	$Line2D.points = points
 		
-	
-	
 	
 func set_strength(num):
 	strength = num

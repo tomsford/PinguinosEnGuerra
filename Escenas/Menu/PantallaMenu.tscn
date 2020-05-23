@@ -46,6 +46,7 @@ margin_bottom = 390.0
 rect_clip_content = false
 size_flags_horizontal = 1
 size_flags_vertical = 1
+scene_to_load = "res://Escenas/Menu/Instrucciones.tscn"
 
 [node name="Tienda" parent="Menu" instance=ExtResource( 2 )]
 anchor_left = 0.0
