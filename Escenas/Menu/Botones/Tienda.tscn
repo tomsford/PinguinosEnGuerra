@@ -6,4 +6,4 @@
 scene_to_load = "res://Escenas/Menu/EscenaTienda.tscn"
 
 [node name="Label" parent="." index="0"]
-text = "TIENDA"
+text = "ONLINE"

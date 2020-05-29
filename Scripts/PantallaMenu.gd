@@ -16,4 +16,5 @@ func _on_Button_pressed(scene_to_load):
 	#$CambioEscena.Cambio_escena()
 
 func _on_CambioEscena_fade_finished():
-	get_tree().change_scene(scene_path_to_load)
+	ScriptGlobal.goto_scene(scene_path_to_load)
+#	get_tree().change_scene(scene_path_to_load)

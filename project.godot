@@ -15,14 +15,15 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Worms"
-run/main_scene="res://Escenas/Menu/PantallaMenu.tscn"
-config/icon="res://Sprites/icon.png"
+config/name="PinguinosEnGuerra"
+run/main_scene="res://Escenas/Portada.tscn"
+config/icon="res://Recursos/fondos/PortadaOficial.png"
 
 [autoload]
 
 UserData="*res://addons/github-integration/scripts/user_data.gd"
 IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
+ScriptGlobal="*res://Scripts/ScriptGlobal.gd"
 
 [display]
 

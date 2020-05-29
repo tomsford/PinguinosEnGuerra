@@ -11,6 +11,7 @@ var cayo = false
 var flipeo = 10
 
 var bala = load("res://Escenas/Bala.tscn")
+var balaBazuca = load("res://Escenas/BalaBazuca.tscn")
 
 func _physics_process(delta):
 	if !cayo:
@@ -36,15 +37,22 @@ func _physics_process(delta):
 		if(is_on_floor()):
 			posicao.y = -350
 	if Input.is_action_just_pressed("sacararma") and caminar and !disparo:
-
-		$AnimationPlayer.play("sacarEscopeta")
+		if ScriptGlobal.arma == 1:
+			$AnimationPlayer.play("sacarEscopeta")
+		else:
+			$AnimationPlayer.play("sacarBazuca")
 		
 		caminar=false
 		disparo= true
 		if not cooldown:
 			cooldown = true
 			$explosion_cooldown.start()
-			var newBala = bala.instance()
+			var newBala
+			if ScriptGlobal.arma == 1:
+				newBala = bala.instance()
+			else:
+				newBala = balaBazuca.instance()
+				
 			newBala.position= $Pos_Bala.global_position + Vector2(flipeo,0)
 			get_parent().add_child(newBala)
 	#Esto mas adelante no va a pasar nunca, ya que despues de disparar cambiaria el turno o habria otra senal que le deje caminar

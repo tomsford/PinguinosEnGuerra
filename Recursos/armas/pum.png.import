@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/animtestVerde.png-432c4eff515fa625cfb0e4236ec4edec.stex"
+path="res://.import/pum.png-d0ac5e7dc60b56e76313c10cac077f9a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Recursos/pinguinos/PinguinoFrente/animtestVerde.png"
-dest_files=[ "res://.import/animtestVerde.png-432c4eff515fa625cfb0e4236ec4edec.stex" ]
+source_file="res://Recursos/armas/pum.png"
+dest_files=[ "res://.import/pum.png-d0ac5e7dc60b56e76313c10cac077f9a.stex" ]
 
 [params]
 

@@ -128,4 +128,8 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 1280, 720 )
 rect_scale = Vector2( 13.9108, 47.4277 )
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/Atras" to="." method="_on_Atras_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Amarillo" to="." method="_on_Amarillo_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Rosa" to="." method="_on_Rosa_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Verde" to="." method="_on_Verde_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Gris" to="." method="_on_Gris_pressed"]
 [connection signal="fade_finished" from="CambioEscena" to="." method="_on_CambioEscena_fade_finished"]
