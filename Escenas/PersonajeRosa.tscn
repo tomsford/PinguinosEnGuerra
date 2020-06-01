@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Recursos/pinguinos/PinguinoFrente/animtestRosaBaz.png" type="Texture" id=1]
+[ext_resource path="res://Recursos/pinguinos/PinguinoFrente/animtestRosaTiro.png" type="Texture" id=1]
 [ext_resource path="res://Escenas/PersonajeAmarillo.tscn" type="PackedScene" id=2]
 
 [node name="Player" instance=ExtResource( 2 )]

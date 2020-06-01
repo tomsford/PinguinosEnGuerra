@@ -8,12 +8,14 @@ height = 53.9202
 
 [node name="Bazuca" instance=ExtResource( 1 )]
 numeroArma = 2
+tamanoExplosion = 40
 
 [node name="Sprite" parent="." index="0"]
+position = Vector2( 0, 15 )
 scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-position = Vector2( -1.07547, -8.60369 )
+position = Vector2( 0, 7 )
 rotation = 1.2962
 shape = SubResource( 1 )

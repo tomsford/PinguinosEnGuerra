@@ -19,6 +19,10 @@ func _input(event):
 			$Bala.visible = true
 		$Line2D.visible = false
 		#$Pivot/TextureProgress.visible = false
+		if ScriptGlobal.arma == 3 : 
+			$Bala/AnimationPlayer.play("molotovTirada") 
+		elif ScriptGlobal.arma == 4 :
+			$Bala/AnimationPlayer.play("bombaTirada")
 		mover()
 		
 
@@ -43,6 +47,7 @@ func mover():
 			$Bala.position = point
 		if contacto:
 			$Line2D.points = []
+			self.queue_free()
 		
 
 func _physics_process(delta):
@@ -64,8 +69,7 @@ func calculate_trajectory():
 		points.append(Vector2(dx,dy))
 	
 	$Line2D.points = points
-		
-	
+
 func set_strength(num):
 	strength = num
 	clamp(strength,0.0,100.0)
@@ -75,7 +79,6 @@ func set_strength(num):
 	
 	calculate_trajectory()
 
-
 func _on_Bala_body_entered(body):
 	contacto = true
-	
+

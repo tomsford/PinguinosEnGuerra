@@ -57,7 +57,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 scene_to_load = "res://Escenas/Menu/Instrucciones.tscn"
 
-[node name="Tienda" parent="Menu" instance=ExtResource( 2 )]
+[node name="Online" parent="Menu" instance=ExtResource( 2 )]
 anchor_left = 0.0
 anchor_right = 0.0
 margin_left = 0.0
@@ -103,4 +103,7 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0.737255, 0.109804, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "PINGUINOS EN GUERRA"
+[connection signal="pressed" from="Menu/Jugar" to="." method="_on_Jugar_pressed"]
+[connection signal="pressed" from="Menu/Online" to="." method="_on_Online_pressed"]
+[connection signal="pressed" from="Menu/Ajustes" to="." method="_on_Ajustes_pressed"]
 [connection signal="fade_finished" from="CambioEscena" to="." method="_on_CambioEscena_fade_finished"]

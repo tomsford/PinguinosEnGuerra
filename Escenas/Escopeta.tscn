@@ -8,6 +8,7 @@ extents = Vector2( 3.0636, 7.11027 )
 
 [node name="Escopeta" instance=ExtResource( 2 )]
 numeroArma = 1
+tamanoExplosion = 30
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )

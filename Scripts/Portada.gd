@@ -9,7 +9,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _physics_process(delta):
 	$Label/AnimationPlayer.play("Presiona_para_seguir")
-	if Input.is_action_just_pressed("sacararma"):
+	if Input.is_action_just_pressed("espacio"):
 		$CambioEscena.show()
 		$CambioEscena.fade_in()
 

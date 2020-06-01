@@ -6,4 +6,5 @@
 [node name="Node2D" instance=ExtResource( 1 )]
 
 [node name="Sprite" parent="Bala" index="0"]
+scale = Vector2( 0.408302, 0.55212 )
 texture = ExtResource( 2 )

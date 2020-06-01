@@ -1,6 +1,11 @@
 extends Node
 
 var current_scene = null
+var LAN= false
+
+var listo1 = false
+var listo2 =false 
+var partida_ready=false
 
 var pinguino = 0
 # 1 = Amarillo
@@ -14,36 +19,41 @@ var arma = 1
 # 3 = Molotov
 # 4 = Bomba
 
+var explosion = 0
+# Escopeta = 40
+# Bazuca = 80
+
+var regalo = 0
+# 1 = Amarillo
+# 2 = Azul
+# 3 = Naranja
+# 4 = Rojo
+# 5 = Rosa
+# 6 = Verde
+# 7 = VerdeAgua
+# 8 = Violeta
+# 9 = Gris 
+
+var tocoRegalo = false
 
 func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
+	
 
 func goto_scene(path):
-	# This function will usually be called from a signal callback,
-	# or some other function in the current scene.
-	# Deleting the current scene at this point is
-	# a bad idea, because it may still be executing code.
-	# This will result in a crash or unexpected behavior.
-
-	# The solution is to defer the load to a later time, when
-	# we can be sure that no code from the current scene is running:
-
+	# Eliminar la escena en esta funcion puede causar problemas, 
+	# por eso llamamos a otra funcion para asegurarnos que 
+	# ya se ejecuto todo el codigo
 	call_deferred("_deferred_goto_scene", path)
 	
-	
 func _deferred_goto_scene(path):
-	# It is now safe to remove the current scene
 	current_scene.free()
-
-	# Load the new scene.
 	var s = ResourceLoader.load(path)
 
-	# Instance the new scene.
 	current_scene = s.instance()
-
-	# Add it to the active scene, as child of root.
 	get_tree().get_root().add_child(current_scene)
-
-	# Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(current_scene)
+
+func accionRegalo():
+	tocoRegalo = true
