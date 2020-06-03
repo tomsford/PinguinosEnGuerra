@@ -1,14 +1,18 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Recursos/Balas/BalaEscopeta.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Bala.gd" type="Script" id=2]
 [ext_resource path="res://Animaciones/molotovTirada.tres" type="Animation" id=3]
 [ext_resource path="res://Escenas/Tiro.gd" type="Script" id=4]
 [ext_resource path="res://Animaciones/bombaTirada.tres" type="Animation" id=5]
+[ext_resource path="res://Animaciones/caida.tres" type="Animation" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.5
 height = 10.2736
+
+[sub_resource type="Animation" id=2]
+resource_name = "caidaBazuca"
 
 [node name="Node2D" type="Node2D"]
 scale = Vector2( 1.40014, 0.999998 )
@@ -21,7 +25,6 @@ width = 5.0
 default_color = Color( 1, 0, 0, 1 )
 
 [node name="Bala" type="RigidBody2D" parent="."]
-visible = false
 collision_layer = 2
 gravity_scale = 0.0
 contacts_reported = 1
@@ -42,6 +45,8 @@ scale = Vector2( 1.56194, 1.40979 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Bala"]
 anims/bombaTirada = ExtResource( 5 )
+anims/caida = ExtResource( 6 )
+anims/caidaBazuca = SubResource( 2 )
 anims/molotovTirada = ExtResource( 3 )
 [connection signal="body_entered" from="Bala" to="Bala" method="_on_Bala_body_entered"]
 [connection signal="body_entered" from="Bala" to="." method="_on_Bala_body_entered"]

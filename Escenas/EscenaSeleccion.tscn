@@ -10,38 +10,34 @@
 [ext_resource path="res://Escenas/Menu/CambioEscena.tscn" type="PackedScene" id=11]
 
 [node name="EscenaSeleccion" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 1274.0
-margin_bottom = 715.0
-rect_min_size = Vector2( 1280, 720 )
+margin_bottom = 104.0
+rect_min_size = Vector2( 1280, 104 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 1932.0
-margin_bottom = 106.0
-
-[node name="Atras" type="Button" parent="VBoxContainer/HBoxContainer2"]
-margin_right = 136.0
-margin_bottom = 106.0
+[node name="Atras" type="Button" parent="HBoxContainer2"]
+margin_right = 131.0
+margin_bottom = 104.0
 rect_min_size = Vector2( 100, 93 )
 custom_fonts/font = ExtResource( 3 )
 text = "ATRAS"
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
-margin_left = 140.0
+[node name="Label" type="Label" parent="HBoxContainer2"]
+margin_left = 135.0
 margin_top = 3.0
-margin_right = 1310.0
-margin_bottom = 103.0
-rect_min_size = Vector2( 1170, 0 )
+margin_right = 1265.0
+margin_bottom = 101.0
+rect_min_size = Vector2( 1130, 0 )
 custom_fonts/font = ExtResource( 3 )
 text = "SELECCIONA TU PERSONAJE"
 align = 1
@@ -49,77 +45,97 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 110.0
-margin_right = 1932.0
-margin_bottom = 510.0
-
-[node name="Amarillo" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 7 )]
-margin_right = 315.0
-margin_bottom = 400.0
-icon = ExtResource( 2 )
-scene_to_load = "res://Escenas/Mapa1Amarillo.tscn"
-
-[node name="Rosa" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 7 )]
-margin_left = 319.0
-margin_right = 634.0
-margin_bottom = 400.0
-icon = ExtResource( 4 )
-scene_to_load = "res://Escenas/Mapa1Rosa.tscn"
-
-[node name="Verde" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 7 )]
-margin_left = 638.0
-margin_right = 953.0
-margin_bottom = 400.0
-icon = ExtResource( 5 )
-scene_to_load = "res://Escenas/Mapa1Verde.tscn"
-
-[node name="Gris" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 7 )]
-margin_left = 957.0
-margin_right = 1272.0
-margin_bottom = 400.0
-icon = ExtResource( 1 )
-scene_to_load = "res://Escenas/Mapa1.tscn"
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 514.0
-margin_right = 1932.0
-margin_bottom = 729.0
-rect_min_size = Vector2( 1280, 215 )
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
-margin_top = 57.0
-margin_right = 480.0
-margin_bottom = 157.0
-custom_fonts/font = ExtResource( 3 )
-text = "DESCRIPCION PERSONAJE"
-
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer3"]
-margin_left = 484.0
-margin_top = 57.0
-margin_right = 964.0
-margin_bottom = 157.0
-custom_fonts/font = ExtResource( 3 )
-text = "DESCRIPCION PERSONAJE"
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -200.0
+margin_right = 12.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 1280, 400 )
+rect_scale = Vector2( 0.990137, 1.00522 )
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer3"]
-margin_left = 968.0
-margin_top = 57.0
-margin_right = 1448.0
-margin_bottom = 157.0
-custom_fonts/font = ExtResource( 3 )
-text = "DESCRIPCION PERSONAJE"
+[node name="Amarillo" parent="HBoxContainer" instance=ExtResource( 7 )]
+margin_right = 320.0
+margin_bottom = 400.0
+icon = ExtResource( 2 )
+scene_to_load = "res://Escenas/Mapa1Amarillo.tscn"
 
-[node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer3"]
-margin_left = 1452.0
-margin_top = 57.0
-margin_right = 1932.0
+[node name="Rosa" parent="HBoxContainer" instance=ExtResource( 7 )]
+margin_left = 324.0
+margin_right = 644.0
+margin_bottom = 400.0
+icon = ExtResource( 4 )
+scene_to_load = "res://Escenas/Mapa1Rosa.tscn"
+
+[node name="Verde" parent="HBoxContainer" instance=ExtResource( 7 )]
+margin_left = 648.0
+margin_right = 968.0
+margin_bottom = 400.0
+icon = ExtResource( 5 )
+scene_to_load = "res://Escenas/Mapa1Verde.tscn"
+
+[node name="Gris" parent="HBoxContainer" instance=ExtResource( 7 )]
+margin_left = 972.0
+margin_right = 1292.0
+margin_bottom = 400.0
+icon = ExtResource( 1 )
+scene_to_load = "res://Escenas/Mapa1.tscn"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -216.0
+margin_bottom = 6.10352e-05
+rect_min_size = Vector2( 1280, 200 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer3"]
+margin_left = 14.0
+margin_top = 59.0
+margin_right = 324.0
 margin_bottom = 157.0
+rect_min_size = Vector2( 310, 0 )
 custom_fonts/font = ExtResource( 3 )
-text = "DESCRIPCION PERSONAJE"
+text = "AMARILLO"
+
+[node name="Label2" type="Label" parent="HBoxContainer3"]
+margin_left = 328.0
+margin_top = 59.0
+margin_right = 638.0
+margin_bottom = 157.0
+rect_min_size = Vector2( 310, 0 )
+custom_fonts/font = ExtResource( 3 )
+text = "ROSA"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="HBoxContainer3"]
+margin_left = 642.0
+margin_top = 59.0
+margin_right = 952.0
+margin_bottom = 157.0
+rect_min_size = Vector2( 310, 0 )
+custom_fonts/font = ExtResource( 3 )
+text = "VERDE"
+
+[node name="Label4" type="Label" parent="HBoxContainer3"]
+margin_left = 956.0
+margin_top = 59.0
+margin_right = 1266.0
+margin_bottom = 157.0
+rect_min_size = Vector2( 310, 0 )
+custom_fonts/font = ExtResource( 3 )
+text = "GRIS"
 
 [node name="CambioEscena" parent="." instance=ExtResource( 11 )]
 visible = false
@@ -127,9 +143,9 @@ margin_right = 1280.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 1280, 720 )
 rect_scale = Vector2( 13.9108, 47.4277 )
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Atras" to="." method="_on_Atras_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Amarillo" to="." method="_on_Amarillo_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Rosa" to="." method="_on_Rosa_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Verde" to="." method="_on_Verde_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Gris" to="." method="_on_Gris_pressed"]
+[connection signal="pressed" from="HBoxContainer2/Atras" to="." method="_on_Atras_pressed"]
+[connection signal="pressed" from="HBoxContainer/Amarillo" to="." method="_on_Amarillo_pressed"]
+[connection signal="pressed" from="HBoxContainer/Rosa" to="." method="_on_Rosa_pressed"]
+[connection signal="pressed" from="HBoxContainer/Verde" to="." method="_on_Verde_pressed"]
+[connection signal="pressed" from="HBoxContainer/Gris" to="." method="_on_Gris_pressed"]
 [connection signal="fade_finished" from="CambioEscena" to="." method="_on_CambioEscena_fade_finished"]

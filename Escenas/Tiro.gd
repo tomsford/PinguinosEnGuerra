@@ -13,23 +13,25 @@ func _input(event):
 	if event.is_action_released("lefft_mouse"):
 		aiming = false
 		ver = true
-		#var newBala = $Bala.instance()
-		#newBala.visible = true
+	
 		if $Bala != null:
 			$Bala.visible = true
 		$Line2D.visible = false
-		#$Pivot/TextureProgress.visible = false
+		
 		if ScriptGlobal.arma == 3 : 
 			$Bala/AnimationPlayer.play("molotovTirada") 
 		elif ScriptGlobal.arma == 4 :
 			$Bala/AnimationPlayer.play("bombaTirada")
+		else:
+			if ScriptGlobal.disparo == 1:
+				$Bala/AnimationPlayer.play("caida")
+			else:
+				$Bala/AnimationPlayer.play("caida") #izquierda
 		mover()
-		
 
 	if aiming:
 		if event is InputEventMouseMotion:
 			self.strength += event.relative.x / 5.0
-
 
 func mover():
 	#var contacto = false
@@ -48,7 +50,6 @@ func mover():
 		if contacto:
 			$Line2D.points = []
 			self.queue_free()
-		
 
 func _physics_process(delta):
 	if !ver:

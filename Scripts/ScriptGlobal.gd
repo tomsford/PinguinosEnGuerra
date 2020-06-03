@@ -34,6 +34,10 @@ var regalo = 0
 # 8 = Violeta
 # 9 = Gris 
 
+var disparo = 0
+# 1 = derecha
+# 2 = izquierda 
+
 var tocoRegalo = false
 
 func _ready():

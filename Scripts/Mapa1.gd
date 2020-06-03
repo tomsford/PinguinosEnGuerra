@@ -118,11 +118,17 @@ func setearArmas():
 			newArma = molotov.instance() 
 			maxmolotov += 1
 			print("creo molotov")
-		else:
+		elif (maxbomba < 2) || (maxescopeta == 2 && maxbazuca == 2 && maxmolotov == 2) :
 			#Bomba
 			newArma = bomba.instance() 
 			maxbomba += 1
 			print("creo bomba")
+		elif (maxbazuca < 2) || (maxescopeta == 2 && maxmolotov == 2 && maxbomba == 2):
+			#Bazuca
+			newArma = bazuca.instance() 
+			maxbazuca += 1
+			print("creo bazuca")
+			
 		newArma.position = posicionesArmas[i]
 
 		get_parent().add_child(newArma)

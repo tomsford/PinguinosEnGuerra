@@ -15,9 +15,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="PinguinosEnGuerra"
+config/name="Pinguinos en Guerra"
 run/main_scene="res://Escenas/Portada.tscn"
-config/icon="res://Recursos/fondos/PortadaOficial.png"
+config/icon="res://Recursos/IconoOficial.png"
 
 [autoload]
 

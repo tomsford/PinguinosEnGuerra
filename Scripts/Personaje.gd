@@ -109,6 +109,7 @@ func _derecha():
 	if caminar && !soyEnemy && ScriptGlobal.partida_ready:
 		posicao.x = 100
 		$Sprite.scale.x = 0.22
+		ScriptGlobal.disparo = 1
 		flipeo = 10
 		scale.x = 0.6
 		scale.y = 0.6
@@ -121,6 +122,7 @@ func _izquierda():
 	if caminar && !soyEnemy && ScriptGlobal.partida_ready:
 		posicao.x = -100
 		$Sprite.scale.x = -0.22
+		ScriptGlobal.disparo = 2
 		flipeo = -100
 		scale.x = 0.6
 		scale.y = 0.6

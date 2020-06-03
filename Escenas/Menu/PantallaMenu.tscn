@@ -103,6 +103,9 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0.737255, 0.109804, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "PINGUINOS EN GUERRA"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Menu/Jugar" to="." method="_on_Jugar_pressed"]
 [connection signal="pressed" from="Menu/Online" to="." method="_on_Online_pressed"]
 [connection signal="pressed" from="Menu/Ajustes" to="." method="_on_Ajustes_pressed"]

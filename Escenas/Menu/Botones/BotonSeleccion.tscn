@@ -3,9 +3,8 @@
 [ext_resource path="res://Scripts/BotonSeleccion.gd" type="Script" id=1]
 
 [node name="BotonSeleccion" type="Button"]
-margin_right = 12.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 315, 400 )
+rect_min_size = Vector2( 320, 400 )
+flat = true
 expand_icon = true
 script = ExtResource( 1 )
 __meta__ = {
