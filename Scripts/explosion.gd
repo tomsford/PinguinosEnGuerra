@@ -6,10 +6,15 @@ export (int) var explosion_size = 40
 func _ready():
 	
 	$CollisionShape2D.shape.radius = ScriptGlobal.explosion / 2
-	if ScriptGlobal.arma == 1:
-		$AnimationPlayer.play("explode")
-	else:
-		$AnimationPlayer.play("nuclear")
+	match ScriptGlobal.arma:
+		1:
+			$AnimationPlayer.play("explode")
+		2:
+			$AnimationPlayer.play("nuclear2")
+		3: 
+			$AnimationPlayer.play("molotov")
+		4:
+			$AnimationPlayer.play("bomb")
 	tilemap = get_tree().get_root().get_node("Mapa1").get_node("Destructable")
 
 func _integrate_forces(state):

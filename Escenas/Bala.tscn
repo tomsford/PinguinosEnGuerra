@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Recursos/Balas/BalaEscopeta.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Bala.gd" type="Script" id=2]
@@ -13,6 +13,23 @@ height = 10.2736
 
 [sub_resource type="Animation" id=2]
 resource_name = "caidaBazuca"
+
+[sub_resource type="Animation" id=3]
+resource_name = "caidaIzq"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -124.893, -129.032, -140.392, -146.878, -151.775, -156.673, -161.57, -166.467, -178.743, -211.649, -221.445, -234.565 ]
+}
 
 [node name="Node2D" type="Node2D"]
 scale = Vector2( 1.40014, 0.999998 )
@@ -47,7 +64,8 @@ scale = Vector2( 1.56194, 1.40979 )
 anims/bombaTirada = ExtResource( 5 )
 anims/caida = ExtResource( 6 )
 anims/caidaBazuca = SubResource( 2 )
+anims/caidaIzq = SubResource( 3 )
 anims/molotovTirada = ExtResource( 3 )
-[connection signal="body_entered" from="Bala" to="Bala" method="_on_Bala_body_entered"]
 [connection signal="body_entered" from="Bala" to="." method="_on_Bala_body_entered"]
+[connection signal="body_entered" from="Bala" to="Bala" method="_on_Bala_body_entered"]
 [connection signal="screen_exited" from="Bala/VisibilityNotifier2D" to="Bala" method="_on_VisibilityNotifier2D_screen_exited"]

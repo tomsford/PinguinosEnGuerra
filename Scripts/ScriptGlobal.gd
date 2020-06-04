@@ -38,12 +38,21 @@ var disparo = 0
 # 1 = derecha
 # 2 = izquierda 
 
+var vida = 200 
+var speed = 0
+var salto = 0
+var balas = 0
+var tiros = 0
+var potenciador = 0
+
 var tocoRegalo = false
+var actualizadoHUD = true
+var tocoArma = false
 
 func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
-	
+
 
 func goto_scene(path):
 	# Eliminar la escena en esta funcion puede causar problemas, 
@@ -61,3 +70,4 @@ func _deferred_goto_scene(path):
 
 func accionRegalo():
 	tocoRegalo = true
+	

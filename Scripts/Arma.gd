@@ -13,5 +13,6 @@ func _on_Arma_body_entered(body):
 	if body.is_in_group("pinguino"):
 			ScriptGlobal.arma = numeroArma
 			ScriptGlobal.explosion = tamanoExplosion
+			ScriptGlobal.tocoArma = true
 			visible = false
 			self.queue_free()

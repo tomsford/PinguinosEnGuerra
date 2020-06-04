@@ -27,12 +27,12 @@ var balaBomba = load("res://Escenas/BalaBomba.tscn")
 
 func _physics_process(delta):
 	
-	$VBoxContainer/Speed.text = "Speed = " + str(desplazar)
-	$VBoxContainer/Tiros.text = "Tiros = " + str(tirosBombas)
-	$VBoxContainer/Salto.text = "Salto = " + str(saltar)
-	$VBoxContainer/Potenciador.text = "Potenciador = " + str(potenciador)
-	$VBoxContainer/Balas.text = "Balas = " + str(balasBazuca)
-	$VBoxContainer/Vida.text = "Vida = " + str(vida)
+	#ScriptGlobal.speed = "Speed = " + str(desplazar)
+	#ScriptGlobal.tiros = "Tiros = " + str(tirosBombas)
+	#ScriptGlobal.salto = "Salto = " + str(saltar)
+	#ScriptGlobal.potenciador = "Potenciador = " + str(potenciador)
+	#ScriptGlobal.balas = "Balas = " + str(balasBazuca)
+	#ScriptGlobal.vida = "Vida = " + str(vida)
 	
 	if !soyEnemy:
 		if !cayo:
@@ -82,28 +82,36 @@ func accionRegalo():
 		2:
 			print("balas bombas")
 			tirosBombas += 3
+			ScriptGlobal.tiros += 3
 		3:
 			print("potenciador")
 			potenciador += 10 
+			ScriptGlobal.potenciador += 1 
 		4:
 			print("vida + 20")
 			vida += 20
+			ScriptGlobal.vida += 20
 		5:
 			print("vida + 10")
 			vida += 10
+			ScriptGlobal.vida += 10
 		6:
 			print("speed")
 			desplazar += 20
+			ScriptGlobal.speed += 1
 		7:
 			print("salto")
 			saltar -= 50
+			ScriptGlobal.salto += 1
 		8:
 			print("balas bazuca")
 			balasBazuca += 3
+			ScriptGlobal.balas += 3
 		9:
 			print("puente")
 	
 	ScriptGlobal.tocoRegalo = false
+	ScriptGlobal.actualizadoHUD = false
 
 func _derecha():
 	if caminar && !soyEnemy && ScriptGlobal.partida_ready:
@@ -123,7 +131,7 @@ func _izquierda():
 		posicao.x = -100
 		$Sprite.scale.x = -0.22
 		ScriptGlobal.disparo = 2
-		flipeo = -100
+		flipeo = -60
 		scale.x = 0.6
 		scale.y = 0.6
 		$AnimationPlayer.play("Nueva Animación")
@@ -163,14 +171,16 @@ func _disparar():
 				2:
 					newBala = balaBazuca.instance()
 					newBala.position= $Pos_Bala.global_position + Vector2(flipeo,0)
+					ScriptGlobal.balas -= 1
 				3:
 					newBala = balaMolotov.instance()
-					newBala.position= $Pos_Bomba.global_position + Vector2(flipeoBombas,0)
+					newBala.position = $Pos_Bomba.global_position + Vector2(flipeoBombas,0)
+					ScriptGlobal.tiros -= 1
 				4:
 					newBala = balaBomba.instance()
 					newBala.position= $Pos_Bomba.global_position + Vector2(flipeoBombas,0)
-		
-					
+					ScriptGlobal.tiros -= 1
+			ScriptGlobal.actualizadoHUD = false
 			get_parent().add_child(newBala)
 			#Esto mas adelante no va a pasar nunca, ya que despues de disparar cambiaria el turno o habria otra senal que le deje caminar
 	elif  !caminar:

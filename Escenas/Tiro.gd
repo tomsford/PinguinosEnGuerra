@@ -1,7 +1,7 @@
 extends Node2D
 
 var gravity = -9.8
-var num_of_points = 60
+var num_of_points = 75
 export (float,100) var strength = 30.0 setget set_strength
 var aiming = false
 var ver = false
@@ -16,7 +16,7 @@ func _input(event):
 	
 		if $Bala != null:
 			$Bala.visible = true
-		$Line2D.visible = false
+		$Line2D.visible = false #Comentar esta linea para probar linea en pc
 		
 		if ScriptGlobal.arma == 3 : 
 			$Bala/AnimationPlayer.play("molotovTirada") 
@@ -26,7 +26,7 @@ func _input(event):
 			if ScriptGlobal.disparo == 1:
 				$Bala/AnimationPlayer.play("caida")
 			else:
-				$Bala/AnimationPlayer.play("caida") #izquierda
+				$Bala/AnimationPlayer.play("caidaIzq") #izquierda
 		mover()
 
 	if aiming:
@@ -55,12 +55,21 @@ func _physics_process(delta):
 	if !ver:
 		$Bala.visible = false
 	if aiming:
-		$Pivot.rotation = $Pivot.global_position.angle_to_point(get_global_mouse_position()) + PI
+		if ScriptGlobal.disparo == 1:
+			$Pivot.rotation = $Pivot.global_position.angle_to_point(get_global_mouse_position()) + 5*PI/6
+		else:
+			$Pivot.rotation = $Pivot.global_position.angle_to_point(get_global_mouse_position()) + PI/6
+
+
 
 func calculate_trajectory():
 	var points = []
 	var total_air_time = 20.0
-	var x_component = strength * cos($Pivot.rotation * -1.0)
+	var x_component
+	if ScriptGlobal.disparo == 1:
+		x_component = strength * cos($Pivot.rotation * -1.0)
+	else: 
+		x_component = strength * cos($Pivot.rotation * -1.0)
 	var y_component = strength * sin($Pivot.rotation * -1.0)
 	for point in num_of_points:
 		var time = total_air_time * point / num_of_points

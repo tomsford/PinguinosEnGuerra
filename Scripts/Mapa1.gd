@@ -56,8 +56,21 @@ var posicionesRegalosIzquierda = {
 
 func _physics_process(delta):
 	
-	
 	var mob
+	
+	if ScriptGlobal.tocoArma:
+		match ScriptGlobal.arma:
+			1:
+				$CanvasLayer/HUD.frame = 0
+			2:
+				$CanvasLayer/HUD.frame = 1
+			3:
+				$CanvasLayer/HUD.frame = 2
+			4:
+				$CanvasLayer/HUD.frame = 3
+	
+	if !ScriptGlobal.actualizadoHUD :
+		actualizarHUD()
 	
 	if !seteadoArmas:
 		setearArmas()
@@ -212,7 +225,6 @@ func setearRegalos():
 func _on_Button_pressed():
 	ScriptGlobal.goto_scene("res://Escenas/Menu/PantallaMenu.tscn")
 
-
 func _on_Tirarse_pressed():
 	if !caido:
 		var mob
@@ -230,7 +242,15 @@ func _on_Tirarse_pressed():
 		if ScriptGlobal.LAN :
 			mob.id = Network.local_player_id
 
-
 func _on_Disparar_released():
 	if caido:
 		TouchGeneral._disparo()
+
+func actualizarHUD():
+	$CanvasLayer/Vida.text = str(ScriptGlobal.vida)
+	$CanvasLayer/Tiros.text = "X " + str(ScriptGlobal.tiros)
+	$CanvasLayer/Balas.text = "X " + str(ScriptGlobal.balas)
+	$CanvasLayer/Potenciador.text = "X " + str(ScriptGlobal.potenciador)
+	$CanvasLayer/Speed.text = "X " + str(ScriptGlobal.speed)
+	$CanvasLayer/Salto.text = "X " + str(ScriptGlobal.salto)
+	ScriptGlobal.actualizadoHUD = true
