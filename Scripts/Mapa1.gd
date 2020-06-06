@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var playerA = preload("res://Escenas/PersonajeAmarillo.tscn")
 var playerR = preload("res://Escenas/PersonajeRosa.tscn")

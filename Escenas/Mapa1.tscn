@@ -849,8 +849,13 @@ height = 217.246
 [sub_resource type="RectangleShape2D" id=37]
 extents = Vector2( 135.309, 109.701 )
 
-[node name="Mapa1" type="Node2D"]
+[node name="Mapa1" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -1069,6 +1074,5 @@ position = Vector2( 3975.12, 114.653 )
 shape = SubResource( 37 )
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Tirarse" to="." method="_on_Tirarse_pressed"]
-[connection signal="pressed" from="CanvasLayer/Disparar" to="." method="_on_Disparar_pressed"]
 [connection signal="released" from="CanvasLayer/Disparar" to="." method="_on_Disparar_released"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_Area2D_body_entered"]
