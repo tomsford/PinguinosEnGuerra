@@ -18,7 +18,7 @@ var flipeoBombas = 10
 var id = 0
 var soyEnemy = false
 var ready = false
-
+var movimiento = Vector2()
 
 var bala = load("res://Escenas/Bala.tscn")
 var balaBazuca = load("res://Escenas/BalaBazuca.tscn")
@@ -38,9 +38,35 @@ func _physics_process(delta):
 		if !cayo:
 			$AnimationPlayer.play("Caer")
 			cayo = true
-		posicao.x = 0	
-		posicao.y += gravity
-		posicao = move_and_slide(posicao,grav)
+		
+		movimiento = TouchGeneral._pad()
+		if caminar: 
+			if(!is_on_floor()):
+				posicao.y += gravity
+			if movimiento.y < 0 and is_on_floor():
+				posicao.y = -350
+			if movimiento.x < 0: #izquierda
+				$Sprite.scale.x = -0.22
+				ScriptGlobal.disparo = 2
+				flipeo = -60
+				scale.x = 0.6
+				scale.y = 0.6
+				$AnimationPlayer.play("Nueva Animación")
+				posicao.x = movimiento.x
+			elif movimiento.x > 0: #derecha
+				$Sprite.scale.x = 0.22
+				ScriptGlobal.disparo = 1
+				flipeo = 10
+				scale.x = 0.6
+				scale.y = 0.6
+				$AnimationPlayer.play("Nueva Animación")
+				posicao.x = movimiento.x
+			elif movimiento.x == 0 and movimiento.y == 0 and is_on_floor():
+				posicao.x = 0
+				posicao.y = 0
+	
+			_enviarMov() #PREGUNTAR BIEN DONDE PONERLO
+			move_and_slide(posicao,grav)
 		Network.miPos=posicao
 		if !ready && is_on_floor() && Network.ready1:
 			ready =true
@@ -113,39 +139,6 @@ func accionRegalo():
 	ScriptGlobal.tocoRegalo = false
 	ScriptGlobal.actualizadoHUD = false
 
-func _derecha():
-	if caminar && !soyEnemy && ScriptGlobal.partida_ready:
-		posicao.x = 100
-		$Sprite.scale.x = 0.22
-		ScriptGlobal.disparo = 1
-		flipeo = 10
-		scale.x = 0.6
-		scale.y = 0.6
-		$AnimationPlayer.play("Nueva Animación")
-	posicao = move_and_slide(posicao,grav)
-	Network.miPos=posicao
-	_enviarMov()
-	
-func _izquierda():
-	if caminar && !soyEnemy && ScriptGlobal.partida_ready:
-		posicao.x = -100
-		$Sprite.scale.x = -0.22
-		ScriptGlobal.disparo = 2
-		flipeo = -60
-		scale.x = 0.6
-		scale.y = 0.6
-		$AnimationPlayer.play("Nueva Animación")
-	posicao = move_and_slide(posicao,grav)
-	Network.miPos=posicao
-	_enviarMov()
-	
-func _arriba():
-	if caminar && !soyEnemy && ScriptGlobal.partida_ready:
-		if(is_on_floor()):
-			posicao.y = -350
-	Network.miPos=posicao
-	_enviarMov()
-	
 func _disparar():
 	if caminar and !disparo && !soyEnemy && ScriptGlobal.partida_ready:
 		match ScriptGlobal.arma:
