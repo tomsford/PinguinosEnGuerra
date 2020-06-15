@@ -80,7 +80,13 @@ func _physics_process(delta):
 	
 	$RigidBody2D.position.x += 3
 	
-
+	if Input.is_action_pressed("ui_right") and caido:
+		TouchGeneral._moverDer()
+	if Input.is_action_pressed("ui_left") and caido:
+		TouchGeneral._moverIzq()
+	if Input.is_action_pressed("ui_up") and caido:
+		TouchGeneral._moverArriba()
+	
 	if ScriptGlobal.LAN && Network.ready1 && Network.ready2 && caido && !yacreeenemy :
 		enemy = playerA.instance()
 		enemy.soyEnemy = true
