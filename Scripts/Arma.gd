@@ -14,5 +14,6 @@ func _on_Arma_body_entered(body):
 			ScriptGlobal.arma = numeroArma
 			ScriptGlobal.explosion = tamanoExplosion
 			ScriptGlobal.tocoArma = true
+			ScriptGlobal.tocoArmaPrimeraVez = true
 			visible = false
 			self.queue_free()

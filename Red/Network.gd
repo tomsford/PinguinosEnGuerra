@@ -25,6 +25,14 @@ var ready1 =false
 var ready2 =false
 var posIniX=0
 var posIniY=0
+var dispararEnemy=false
+var armaEnemy=0
+var crearBala=false
+var lineaBala
+var escalaEnemy
+var dispararBala = false
+var direccionEnemy = 0
+
 #CLIENT FUNCTIONS
 #Cuando un cliente quiere conectarse al servidor
 func connect_to_server(server_ip):# ORDER 01
@@ -38,6 +46,8 @@ func connect_to_server(server_ip):# ORDER 01
 #Cliente pudo conectarse al servidor
 func _connected_to_server():# ORDER 02
 	local_player_id = get_tree().get_network_unique_id()
+	print("ID = = = = = = ")
+	print(local_player_id)
 	rpc('_add_player_first_data', local_player_id, mi_data)#Call to 03
 
 remotesync func _start_from_client(p, ids):# ORDER 04
@@ -89,5 +99,37 @@ remotesync func _get_movement(data):
 			print ("cambie ready 2")
 	if(data.player != local_player_id && ScriptGlobal.partida_ready):
 		enemyPos=Vector2(data.posx,data.posy)
+		#escalaEnemy=data.escala
+		direccionEnemy = data.direccion
 	#get_tree().get_nodes_in_group("movement_receiver")[0]._initialize()
 	
+func sendDisparo(data):
+	rpc("getDisparo",data)
+remote func getDisparo(data):
+	print("tiene q disparar enemy (network)")
+	dispararEnemy = data.disparo
+	armaEnemy = data.arma
+	
+func sendCambiarTurno():
+	rpc("cambiarTurno")
+
+remotesync func cambiarTurno():
+	var last = Network.players_IDS.find(Network.last_movement_id)
+	if last == CANT_PLAYERS:
+		last = 0
+	else:
+		last +=1
+	last_movement_id=Network.players_IDS[last]	 
+		
+func sendInstanciarBala(data):
+	rpc("instanciarBala",data)
+
+remote func instanciarBala(data):
+	print ("instanciar bala network")
+	crearBala =true
+	lineaBala = data
+	#print("puntos en networrrrk")
+	#print(lineaBala)
+	#print("puntos data")
+	#print(data)
+	dispararBala = true

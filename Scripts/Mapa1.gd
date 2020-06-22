@@ -84,7 +84,10 @@ func _physics_process(delta):
 	if ScriptGlobal.LAN && Network.ready1 && Network.ready2 && caido && !yacreeenemy :
 		enemy = playerA.instance()
 		enemy.soyEnemy = true
-		enemy.id = Network.players_IDS[1]
+		if Network.players_IDS[0]==Network.local_player_id: 
+			enemy.id = Network.players_IDS[1]#cambiar, mal para segundo player
+		else:
+			enemy.id = Network.players_IDS[0]
 		#enemy.position = Vector2(Network.posIniX,Network.posIniX)
 		enemy.global_position.x = Network.posIniX
 		enemy.global_position.y = Network.posIniY
@@ -95,6 +98,10 @@ func _physics_process(delta):
 		print ("CREE ENEMIGO CON POSICION en Y:")
 		print (Network.posIniY)
 		ScriptGlobal.partida_ready = true
+	if ScriptGlobal.LAN && ScriptGlobal.partida_ready:
+		$CanvasLayer/Turno.text = "TURNO DE:\nPlayer"+str(Network.last_movement_id)
+		if Network.last_movement_id == Network.local_player_id: #My turn
+			$CanvasLayer/Turno.text += "\n(TU)"
 
 func setearArmas():
 	var newArma

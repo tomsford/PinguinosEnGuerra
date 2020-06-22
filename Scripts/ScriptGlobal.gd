@@ -19,7 +19,7 @@ var arma = 1
 # 3 = Molotov
 # 4 = Bomba
 
-var explosion = 0
+var explosion = 30
 # Escopeta = 40
 # Bazuca = 80
 
@@ -48,6 +48,7 @@ var potenciador = 0
 var tocoRegalo = false
 var actualizadoHUD = true
 var tocoArma = false
+var tocoArmaPrimeraVez = false
 
 func _ready():
 	var root = get_tree().get_root()

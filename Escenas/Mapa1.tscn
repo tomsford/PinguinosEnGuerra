@@ -1005,6 +1005,18 @@ pressed = ExtResource( 49 )
 shape = SubResource( 1 )
 script = ExtResource( 42 )
 
+[node name="Turno" type="Label" parent="CanvasLayer"]
+modulate = Color( 0.941176, 0.054902, 0.160784, 1 )
+self_modulate = Color( 0.960784, 0.117647, 0.117647, 1 )
+margin_left = 457.85
+margin_top = 24.2
+margin_right = 593.85
+margin_bottom = 49.2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Destructable" type="TileMap" parent="." groups=[
 "destructable",
 ]]
