@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/y2mate.com - Sonido Escopeta - Efecto de sonido_af2pn4Ww5HQ.wav-b7d88e18f7e01ed7ae984fa636a0c9d0.sample"
+
+[deps]
+
+source_file="res://Recursos/SFX/y2mate.com - Sonido Escopeta - Efecto de sonido_af2pn4Ww5HQ.wav"
+dest_files=[ "res://.import/y2mate.com - Sonido Escopeta - Efecto de sonido_af2pn4Ww5HQ.wav-b7d88e18f7e01ed7ae984fa636a0c9d0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

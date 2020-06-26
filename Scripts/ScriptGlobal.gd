@@ -34,11 +34,11 @@ var regalo = 0
 # 8 = Violeta
 # 9 = Gris 
 
-var disparo = 0
+var disparo = 1
 # 1 = derecha
 # 2 = izquierda 
 
-var vida = 200 
+var vida = 200 # es para probar despues se pone en 200
 var speed = 0
 var salto = 0
 var balas = 0
@@ -50,10 +50,24 @@ var actualizadoHUD = true
 var tocoArma = false
 var tocoArmaPrimeraVez = false
 
+var tiempo = 20 
+const tiempoPorNivel = 30# es para probar despues se pone en 60 o mas
+var puntos = 0 # es para probar despues se pone en 0
+var disparo_SP = false
+var velocidad = 50
+var nivel = 1
+const NIVEL_MAXIMO = 6
+
+var apuntando = false
+
+var reproducir = 0
+var reproducirV = 0
+
+var balaActiva = false
+
 func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
-
 
 func goto_scene(path):
 	# Eliminar la escena en esta funcion puede causar problemas, 
@@ -71,4 +85,13 @@ func _deferred_goto_scene(path):
 
 func accionRegalo():
 	tocoRegalo = true
+
+func update_time():
+	get_tree().get_nodes_in_group("tiempo")[0].text = String(tiempo)
 	
+func update_puntos():
+	get_tree().get_nodes_in_group("puntos")[0].text =  String(puntos)
+
+func update_vida():
+	get_tree().get_nodes_in_group("vida")[0].text = String(vida)
+

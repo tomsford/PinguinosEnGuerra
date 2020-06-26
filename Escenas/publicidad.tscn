@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Recursos/fondos/31314.jpg" type="Texture" id=1]
+[ext_resource path="res://fuentes/snow_kei/Snow Kei.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Escenas/publicidad.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 2 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -57.5
+margin_bottom = 57.5
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0.737255, 0.109804, 1 )
+text = "ESPACIO PUBLICITARIO"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

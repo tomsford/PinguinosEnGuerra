@@ -5,16 +5,16 @@
 [node name="EscenaJugar" instance=ExtResource( 1 )]
 
 [node name="VBoxContainer" parent="CenterContainer" index="0"]
-margin_left = 500.0
-margin_top = 255.0
-margin_right = 779.0
-margin_bottom = 465.0
+margin_left = 506.0
+margin_top = 257.0
+margin_right = 773.0
+margin_bottom = 463.0
 
 [node name="Label" parent="CenterContainer/VBoxContainer" index="0"]
-margin_right = 279.0
-margin_bottom = 100.0
+margin_right = 267.0
+margin_bottom = 98.0
 
 [node name="Button" parent="CenterContainer/VBoxContainer" index="1"]
-margin_top = 104.0
-margin_right = 279.0
-margin_bottom = 210.0
+margin_top = 102.0
+margin_right = 267.0
+margin_bottom = 206.0

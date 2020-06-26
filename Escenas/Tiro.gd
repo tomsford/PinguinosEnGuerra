@@ -9,31 +9,45 @@ var contacto = false
 
 var cantSoltado = 0
 
+var bloqueo = 0
+
 func _input(event):
-	if event.is_action_pressed("lefft_mouse"):
-		aiming = true
-	if event.is_action_released("lefft_mouse"):
-		cantSoltado += 1
-		if cantSoltado == 2:
-			aiming = false
-			ver = true
+	if bloqueo <= 2:
 		
-			if $Bala != null:
-				$Bala.visible = true
-			#$Line2D.visible = false #Comentar esta linea para probar linea en pc
+		if event.is_action_pressed("lefft_mouse"):
+			aiming = true
+			ScriptGlobal.apuntando = true
+			bloqueo += 1
+		if event.is_action_released("lefft_mouse"):
+			bloqueo += 1
+			cantSoltado += 1
+			if cantSoltado == 2:
+				aiming = false
+				ScriptGlobal.apuntando = false
+				ver = true
 			
-			if ScriptGlobal.arma == 3 : 
-				$Bala/AnimationPlayer.play("molotovTirada") 
-			elif ScriptGlobal.arma == 4 :
-				$Bala/AnimationPlayer.play("bombaTirada")
-			else:
-				if ScriptGlobal.disparo == 1:
-					$Bala/AnimationPlayer.play("caida")
+				if $Bala != null:
+					$Bala.visible = true
+				$Line2D.visible = false #Comentar esta linea para probar linea en pc
+				
+				if ScriptGlobal.arma == 1:
+					$RuidoBala.play()
+				elif ScriptGlobal.arma == 2:
+					$RuidoBazuca.play()
+				if ScriptGlobal.arma == 3 : 
+					$Bala/AnimationPlayer.play("molotovTirada") 
+				elif ScriptGlobal.arma == 4 :
+					$Bala/AnimationPlayer.play("bombaTirada")
 				else:
-					$Bala/AnimationPlayer.play("caidaIzq") #izquierda
-			mover()
-			cantSoltado = 0
-		
+					if ScriptGlobal.disparo == 1:
+						if $Bala != null:
+							$Bala/AnimationPlayer.play("caida")
+					else:
+						if $Bala != null:
+							$Bala/AnimationPlayer.play("caidaIzq") #izquierda
+				mover()
+				cantSoltado = 0
+			
 	if aiming:
 		if event is InputEventMouseMotion:
 			self.strength += event.relative.x / 5.0
@@ -63,8 +77,9 @@ func mover():
 		if contacto:
 			$Line2D.points = []
 			self.queue_free()
-			get_tree().get_nodes_in_group("pinguino")[0]._disparar()
-			Network.sendCambiarTurno()
+			if ScriptGlobal.LAN:
+				get_tree().get_nodes_in_group("pinguino")[0]._disparar()
+				Network.sendCambiarTurno()
 
 func _physics_process(delta):
 	if Network.dispararBala:
@@ -136,4 +151,5 @@ func set_strength(num):
 
 func _on_Bala_body_entered(body):
 	contacto = true
+	bloqueo = 0
 

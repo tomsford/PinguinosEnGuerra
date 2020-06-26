@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Escenas/Menu/Botones/Salir.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Escenas/Menu/Botones/Tienda.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Escenas/Menu/Botones/Jugar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/PantallaMenu.gd" type="Script" id=6]
 [ext_resource path="res://Recursos/fondos/FondoMenu.png" type="Texture" id=7]
+[ext_resource path="res://Recursos/BGM/Arex's Beat.ogg" type="AudioStream" id=8]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fuentes/snow_kei/Snow Kei.ttf"
@@ -55,7 +56,7 @@ margin_bottom = 390.0
 rect_clip_content = false
 size_flags_horizontal = 1
 size_flags_vertical = 1
-scene_to_load = "res://Escenas/Menu/Instrucciones.tscn"
+scene_to_load = "res://Escenas/MenuUnJugador.tscn"
 
 [node name="Online" parent="Menu" instance=ExtResource( 2 )]
 anchor_left = 0.0
@@ -106,6 +107,9 @@ text = "PINGUINOS EN GUERRA"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MusicaFondo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
 [connection signal="pressed" from="Menu/Jugar" to="." method="_on_Jugar_pressed"]
 [connection signal="pressed" from="Menu/Online" to="." method="_on_Online_pressed"]
 [connection signal="pressed" from="Menu/Ajustes" to="." method="_on_Ajustes_pressed"]

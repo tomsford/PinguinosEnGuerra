@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Vicoria.ogg-5daa92ef16a34144156d5601f483a839.oggstr"
+
+[deps]
+
+source_file="res://Recursos/BGM/Vicoria.ogg"
+dest_files=[ "res://.import/Vicoria.ogg-5daa92ef16a34144156d5601f483a839.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://fuentes/CAMPUS PERSONAL USE.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Escenas/GameOver.gd" type="Script" id=2]
+[ext_resource path="res://fuentes/28 Days Later.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Recursos/fondos/negro.jpg" type="Texture" id=4]
+[ext_resource path="res://Recursos/BGM/y2mate.com - música para sentirse derrotado sin copyright_AyC81TN8erg.wav" type="AudioStream" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 150
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "GameOver"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7, 8, 0, -1, 0, -1 ]
+}
+
+[sub_resource type="DynamicFont" id=3]
+size = 70
+font_data = ExtResource( 3 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -26.0
+margin_right = 27.0
+margin_bottom = -1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -13.0
+margin_top = 1.0
+margin_right = 1294.0
+margin_bottom = 759.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -46.0
+margin_bottom = 144.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "GAME OVER"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+anims/GameOver = SubResource( 2 )
+
+[node name="Puntuacion" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.33948
+margin_top = -135.888
+margin_right = -1.33948
+margin_bottom = -35.8884
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "puntaje final  0 "
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true

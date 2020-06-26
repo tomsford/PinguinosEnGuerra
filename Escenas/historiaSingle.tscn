@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fuentes/28 Days Later.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Recursos/fondos/31314.jpg" type="Texture" id=2]
+[ext_resource path="res://Escenas/historiaSingle.gd" type="Script" id=3]
+[ext_resource path="res://Recursos/BGM/Arex's Beat.ogg" type="AudioStream" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 65
+font_data = ExtResource( 1 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 1280.0
+margin_bottom = 719.0
+custom_fonts/font = SubResource( 1 )
+text = "Historia....
+
+En un mundo donde la escasez de alimento
+ ocurre todos los dias, 
+nuestro querido amigo rocky 
+el pinguino debera eliminar a aquellos 
+que vienen a robarse su comida y llevarla 
+sana y salva a su iglu.
+Para esto contara con tu ayuda y numerosas
+ armas para enfrentar aquien quiera herirlo..."
+align = 1
+
+[node name="MusicaFondo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )

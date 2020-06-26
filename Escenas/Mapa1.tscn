@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://Scripts/Zeppelin.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Destructable.gd" type="Script" id=2]
@@ -42,6 +42,7 @@
 [ext_resource path="res://Recursos/TileMap2/Cuadrado/TileMap2_01.png" type="Texture" id=40]
 [ext_resource path="res://Recursos/SpritesHUB.png" type="Texture" id=41]
 [ext_resource path="res://Scripts/Pad.gd" type="Script" id=42]
+[ext_resource path="res://Recursos/BGM/Heroic Intrusion.ogg" type="AudioStream" id=43]
 [ext_resource path="res://Sprites/boton3.png" type="Texture" id=45]
 [ext_resource path="res://Sprites/boton4.png" type="Texture" id=46]
 [ext_resource path="res://Sprites/joystick1.png" type="Texture" id=47]
@@ -875,16 +876,16 @@ __meta__ = {
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 427.844, 679.419 )
+position = Vector2( 427.844, 657.265 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 41 )
 vframes = 4
 
 [node name="Vida" type="Label" parent="CanvasLayer"]
 margin_left = 258.521
-margin_top = 697.382
+margin_top = 675.228
 margin_right = 298.521
-margin_bottom = 711.382
+margin_bottom = 689.228
 rect_scale = Vector2( 1.69797, 1.14801 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
@@ -897,9 +898,9 @@ __meta__ = {
 
 [node name="Tiros" type="Label" parent="CanvasLayer"]
 margin_left = 326.196
-margin_top = 697.512
+margin_top = 675.358
 margin_right = 366.196
-margin_bottom = 711.512
+margin_bottom = 689.358
 rect_scale = Vector2( 1.69797, 1.14801 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
@@ -912,9 +913,9 @@ __meta__ = {
 
 [node name="Balas" type="Label" parent="CanvasLayer"]
 margin_left = 393.976
-margin_top = 697.274
+margin_top = 675.12
 margin_right = 433.976
-margin_bottom = 711.274
+margin_bottom = 689.12
 rect_scale = Vector2( 1.69797, 1.14801 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
@@ -927,9 +928,9 @@ __meta__ = {
 
 [node name="Potenciador" type="Label" parent="CanvasLayer"]
 margin_left = 461.33
-margin_top = 697.274
+margin_top = 675.12
 margin_right = 501.33
-margin_bottom = 711.274
+margin_bottom = 689.12
 rect_scale = Vector2( 1.69797, 1.14801 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
@@ -942,9 +943,9 @@ __meta__ = {
 
 [node name="Speed" type="Label" parent="CanvasLayer"]
 margin_left = 529.479
-margin_top = 697.051
+margin_top = 674.897
 margin_right = 569.479
-margin_bottom = 711.051
+margin_bottom = 688.897
 rect_scale = Vector2( 1.69797, 1.14801 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
@@ -957,9 +958,9 @@ __meta__ = {
 
 [node name="Salto" type="Label" parent="CanvasLayer"]
 margin_left = 596.982
-margin_top = 697.4
+margin_top = 675.246
 margin_right = 636.982
-margin_bottom = 711.4
+margin_bottom = 689.246
 rect_scale = Vector2( 1.69797, 1.14801 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
@@ -971,8 +972,9 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="CanvasLayer"]
+margin_top = -8.54993
 margin_right = 136.0
-margin_bottom = 106.0
+margin_bottom = 97.4501
 custom_fonts/font = ExtResource( 6 )
 text = "ATRAS"
 __meta__ = {
@@ -980,17 +982,44 @@ __meta__ = {
 }
 
 [node name="Tirarse" type="TouchScreenButton" parent="CanvasLayer"]
-position = Vector2( 21.168, 641.791 )
+position = Vector2( 21.168, 621.45 )
 scale = Vector2( 0.2, 0.2 )
 normal = ExtResource( 46 )
 pressed = ExtResource( 45 )
 
+[node name="Caer" type="Label" parent="CanvasLayer/Tirarse"]
+margin_left = -98.4828
+margin_top = 347.201
+margin_right = -10.4828
+margin_bottom = 361.201
+rect_scale = Vector2( 6.4362, 10.6498 )
+custom_colors/font_color = Color( 0.027451, 0.027451, 0.027451, 1 )
+text = "CAER"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Disparar" type="TouchScreenButton" parent="CanvasLayer"]
-position = Vector2( 98.7135, 641.904 )
+position = Vector2( 98.713, 621.45 )
 scale = Vector2( 0.2, 0.2 )
 normal = ExtResource( 46 )
 pressed = ExtResource( 45 )
 action = "sacararma"
+
+[node name="disparar" type="Label" parent="CanvasLayer/Disparar"]
+margin_left = -116.91
+margin_top = 339.664
+margin_right = -28.9096
+margin_bottom = 353.664
+rect_scale = Vector2( 6.4362, 10.6498 )
+custom_colors/font_color = Color( 0.027451, 0.027451, 0.027451, 1 )
+text = "DISPARAR"
+align = 1
+percent_visible = -0.25
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Joystick" type="Sprite" parent="CanvasLayer"]
 position = Vector2( 1167.5, 622.633 )
@@ -1079,6 +1108,10 @@ script = ExtResource( 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 3975.12, 114.653 )
 shape = SubResource( 38 )
+
+[node name="MusicaFondo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 43 )
+autoplay = true
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Tirarse" to="." method="_on_Tirarse_pressed"]
 [connection signal="released" from="CanvasLayer/Disparar" to="." method="_on_Disparar_released"]

@@ -1,0 +1,94 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://fuentes/snow_kei/Snow Kei.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Recursos/ModoSingle/firework2.png" type="Texture" id=2]
+[ext_resource path="res://Victoria.gd" type="Script" id=3]
+[ext_resource path="res://Recursos/fondos/200127-6.jpg" type="Texture" id=4]
+[ext_resource path="res://Recursos/BGM/Vicoria.ogg" type="AudioStream" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "firework2"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.678431, 0.462745, 0.462745, 1 ), Color( 0.796078, 0.333333, 0.333333, 1 ), Color( 0.807843, 0.533333, 0.533333, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 150
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Victoria"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.1, 1.3, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, 0, -1 ]
+}
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -140.62
+margin_top = -116.592
+margin_right = 1433.38
+margin_bottom = 820.408
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="firework2" type="Sprite" parent="."]
+self_modulate = Color( 0.798937, 0.381921, 0.381921, 1 )
+position = Vector2( 644.007, 357.774 )
+scale = Vector2( 0.583647, 0.292588 )
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="firework2"]
+anims/firework2 = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -86.0
+margin_bottom = 86.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 0.486275, 0, 1 )
+text = "VICTORIA! "
+align = 1
+percent_visible = 0.111111
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+anims/Victoria = SubResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true

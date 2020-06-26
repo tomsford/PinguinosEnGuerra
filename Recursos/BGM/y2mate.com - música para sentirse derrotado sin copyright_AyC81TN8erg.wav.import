@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/y2mate.com - música para sentirse derrotado sin copyright_AyC81TN8erg.wav-9302502863dfb4550b6a76e48d1db119.sample"
+
+[deps]
+
+source_file="res://Recursos/BGM/y2mate.com - música para sentirse derrotado sin copyright_AyC81TN8erg.wav"
+dest_files=[ "res://.import/y2mate.com - música para sentirse derrotado sin copyright_AyC81TN8erg.wav-9302502863dfb4550b6a76e48d1db119.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

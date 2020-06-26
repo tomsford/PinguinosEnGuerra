@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Archangel.wav-63c30eed8e9915669550a89980f6c379.sample"
+
+[deps]
+
+source_file="res://Recursos/BGM/Archangel.wav"
+dest_files=[ "res://.import/Archangel.wav-63c30eed8e9915669550a89980f6c379.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

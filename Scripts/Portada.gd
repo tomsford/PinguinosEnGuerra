@@ -1,12 +1,10 @@
 extends Control
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+func _ready():
+	$MusicaFondo.play(8.0)
+	
 
-
-# Called when the node enters the scene tree for the first time.
 func _physics_process(delta):
 	$Label/AnimationPlayer.play("Presiona_para_seguir")
 	if Input.is_action_just_pressed("espacio"):
@@ -14,6 +12,7 @@ func _physics_process(delta):
 		$CambioEscena.fade_in()
 
 func _on_CambioEscena_fade_finished():
+	ScriptGlobal.reproducir = $MusicaFondo.get_playback_position()
 	ScriptGlobal.goto_scene("res://Escenas/Menu/PantallaMenu.tscn")
 #	//get_tree().change_scene("res://Escenas/Menu/PantallaMenu.tscn")
 

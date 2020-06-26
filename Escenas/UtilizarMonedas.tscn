@@ -1,0 +1,231 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://fuentes/Fuentee.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Recursos/ModoSingle/corazon.png" type="Texture" id=2]
+[ext_resource path="res://Escenas/UtilizarMonedas.gd" type="Script" id=3]
+[ext_resource path="res://Recursos/ModoSingle/MonedaPeG.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/boton4.png" type="Texture" id=5]
+[ext_resource path="res://fuentes/28 Days Later.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Sprites/boton2.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/boton1.png" type="Texture" id=8]
+[ext_resource path="res://fuentes/snow_kei/Snow Kei.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Recursos/fondos/31314.jpg" type="Texture" id=10]
+[ext_resource path="res://Recursos/BGM/Arex's Beat.ogg" type="AudioStream" id=11]
+
+[sub_resource type="DynamicFont" id=1]
+size = 70
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 70
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 70
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 50
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 50
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 70
+font_data = ExtResource( 6 )
+
+[sub_resource type="CanvasItemMaterial" id=7]
+render_priority = 4
+light_mode = 1
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.753113
+margin_top = -4.91101
+margin_right = -0.753174
+margin_bottom = -4.91101
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 5.0
+margin_bottom = 9.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+margin_bottom = 337.0
+custom_fonts/font = ExtResource( 1 )
+text = "Las monedas al final del juego se intercambian por
+pescado para tu familia.
+Pero puedes intercambiarlas en este momento por 
+mas vida. "
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 353.887
+margin_top = 346.587
+margin_right = 393.887
+margin_bottom = 407.587
+custom_fonts/font = SubResource( 1 )
+text = "1"
+
+[node name="MonedaPeG" type="Sprite" parent="."]
+position = Vector2( 477.473, 391.436 )
+scale = Vector2( 0.288061, 0.24354 )
+texture = ExtResource( 4 )
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 598.564
+margin_top = 340.093
+margin_right = 638.564
+margin_bottom = 421.093
+custom_fonts/font = SubResource( 2 )
+text = "="
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="corazon" type="Sprite" parent="."]
+position = Vector2( 831.954, 368.832 )
+scale = Vector2( 0.0382732, 0.0260733 )
+texture = ExtResource( 2 )
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 682.907
+margin_top = 348.255
+margin_right = 734.907
+margin_bottom = 409.255
+custom_fonts/font = SubResource( 3 )
+text = "10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label5" type="Label" parent="."]
+margin_left = 67.3217
+margin_top = 460.846
+margin_right = 467.322
+margin_bottom = 542.846
+custom_fonts/font = ExtResource( 1 )
+text = "EN ESTE MOMENTO TIENES: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MonedaPeG2" type="Sprite" parent="."]
+position = Vector2( 616.948, 505.811 )
+scale = Vector2( 0.119771, 0.113529 )
+texture = ExtResource( 4 )
+
+[node name="CantidadMonedas" type="Label" parent="."]
+margin_left = 533.352
+margin_top = 476.311
+margin_right = 583.352
+margin_bottom = 519.311
+custom_fonts/font = SubResource( 4 )
+text = "20"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="corazon2" type="Sprite" parent="."]
+position = Vector2( 783.692, 499.49 )
+scale = Vector2( 0.0177235, 0.0123286 )
+texture = ExtResource( 2 )
+
+[node name="CantidadVida" type="Label" parent="."]
+margin_left = 667.919
+margin_top = 476.181
+margin_right = 741.919
+margin_bottom = 519.181
+custom_fonts/font = SubResource( 5 )
+text = "200"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CambioMonedas" type="Label" parent="."]
+margin_left = 77.1664
+margin_top = 595.928
+margin_right = 117.166
+margin_bottom = 656.928
+custom_fonts/font = SubResource( 6 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="mas" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2( 148.271, 615.59 )
+rotation = -1.5748
+scale = Vector2( 0.189039, 0.242448 )
+normal = ExtResource( 8 )
+pressed = ExtResource( 7 )
+
+[node name="menos" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2( 202.018, 617.736 )
+rotation = 1.56409
+scale = Vector2( 0.203538, 0.235288 )
+normal = ExtResource( 8 )
+pressed = ExtResource( 7 )
+
+[node name="Cambiar" type="TouchScreenButton" parent="CanvasLayer"]
+self_modulate = Color( 0, 0, 0, 1 )
+material = SubResource( 7 )
+position = Vector2( 210.235, 573.666 )
+scale = Vector2( 0.631196, 0.266976 )
+normal = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="CanvasLayer/Cambiar"]
+margin_left = 15.8555
+margin_top = -48.2173
+margin_right = 148.855
+margin_bottom = 33.7827
+rect_scale = Vector2( 2.35555, 4.72082 )
+custom_fonts/font = ExtResource( 1 )
+text = "CAMBIAR"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Seguir" type="TouchScreenButton" parent="CanvasLayer"]
+self_modulate = Color( 0, 0, 0, 1 )
+material = SubResource( 7 )
+position = Vector2( 806.122, 574.343 )
+scale = Vector2( 1.14181, 0.267435 )
+normal = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="CanvasLayer/Seguir"]
+margin_left = 8.49568
+margin_top = -48.217
+margin_right = 248.496
+margin_bottom = 33.783
+rect_scale = Vector2( 1.36014, 4.72082 )
+custom_fonts/font = ExtResource( 1 )
+text = "SIGUIENTE NIVEL"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicaFondo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+[connection signal="pressed" from="CanvasLayer/mas" to="." method="_on_mas_pressed"]
+[connection signal="pressed" from="CanvasLayer/menos" to="." method="_on_menos_pressed"]
+[connection signal="pressed" from="CanvasLayer/Cambiar" to="." method="_on_Cambiar_pressed"]
+[connection signal="pressed" from="CanvasLayer/Seguir" to="." method="_on_Seguir_pressed"]

@@ -23,9 +23,13 @@ func _process(delta):
 func _on_Cant_Players2_pressed():
 	_startServer(1)
 func _on_Cant_Players3_pressed():
-	_startServer(2)
+	#aqui se pondra la opcion de comercializacion
+	#_startServer(2)
+	pass
 func _on_Cant_Players4_pressed():
-	_startServer(3)
+	#aqui se pondra la opcion de comercializacion
+	#_startServer(3)
+	pass
 func _startServer(cant_players):
 	$"SERVER PANEL".visible = false
 	if cant_players <3:
@@ -75,6 +79,6 @@ func _on_START_SERVER_pressed():
 	Network.call_all_peers_start()
 
 func _on_Start_Scene():
-	ScriptGlobal.goto_scene("res://Escenas/Menu/Instrucciones.tscn")
+	ScriptGlobal.goto_scene("res://Escenas/Mapa1.tscn")
 	#print(get_tree().change_scene("res://Escenas/Menu/Instrucciones.tscn"))
 	ScriptGlobal.LAN =true
