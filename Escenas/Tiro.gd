@@ -31,9 +31,11 @@ func _input(event):
 				$Line2D.visible = false #Comentar esta linea para probar linea en pc
 				
 				if ScriptGlobal.arma == 1:
-					$RuidoBala.play()
+					if !ScriptGlobal.mute:
+						$RuidoBala.play()
 				elif ScriptGlobal.arma == 2:
-					$RuidoBazuca.play()
+					if !ScriptGlobal.mute:
+						$RuidoBazuca.play()
 				if ScriptGlobal.arma == 3 : 
 					$Bala/AnimationPlayer.play("molotovTirada") 
 				elif ScriptGlobal.arma == 4 :

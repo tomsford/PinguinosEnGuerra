@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fuentes/snow_kei/Snow Kei.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Escenas/MenuUnJugador.gd" type="Script" id=2]
 [ext_resource path="res://Recursos/fondos/31314.jpg" type="Texture" id=3]
 [ext_resource path="res://Recursos/BGM/Arex's Beat.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Recursos/botonSonido.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -72,5 +73,14 @@ text = "SALIR"
 
 [node name="MusicaFondo" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 1172.31
+margin_top = 613.781
+margin_right = 1684.31
+margin_bottom = 1125.78
+rect_scale = Vector2( 0.15, 0.15 )
+texture_normal = ExtResource( 5 )
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Comenzar" to="." method="_on_Comenzar_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Salir" to="." method="_on_Salir_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

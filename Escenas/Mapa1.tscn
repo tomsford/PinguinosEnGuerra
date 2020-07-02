@@ -1,11 +1,11 @@
-[gd_scene load_steps=87 format=2]
+[gd_scene load_steps=88 format=2]
 
 [ext_resource path="res://Scripts/Zeppelin.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Destructable.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Mapa1.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/CameraP.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Area2DCamara.gd" type="Script" id=5]
-[ext_resource path="res://fuentes/Fuentee.tres" type="DynamicFont" id=6]
+[ext_resource path="res://fuentes/28 Days Later.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Recursos/pinguinos/ZeppelinPinguino.png" type="Texture" id=7]
 [ext_resource path="res://Recursos/TileMap2/Cuadrado/TileMap2_09.png" type="Texture" id=8]
 [ext_resource path="res://Recursos/TileMapa1/FondoTile1-2_149.png" type="Texture" id=9]
@@ -48,6 +48,10 @@
 [ext_resource path="res://Sprites/joystick1.png" type="Texture" id=47]
 [ext_resource path="res://Sprites/joystick2.png" type="Texture" id=48]
 [ext_resource path="res://Sprites/joystick3.png" type="Texture" id=49]
+
+[sub_resource type="DynamicFont" id=39]
+size = 50
+font_data = ExtResource( 6 )
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 110.0
@@ -971,11 +975,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="CanvasLayer"]
-margin_top = -8.54993
-margin_right = 136.0
-margin_bottom = 97.4501
-custom_fonts/font = ExtResource( 6 )
+[node name="BotonAtras" type="Button" parent="CanvasLayer"]
+margin_right = 146.0
+margin_bottom = 49.0
+custom_fonts/font = SubResource( 39 )
 text = "ATRAS"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1016,7 +1019,6 @@ rect_scale = Vector2( 6.4362, 10.6498 )
 custom_colors/font_color = Color( 0.027451, 0.027451, 0.027451, 1 )
 text = "DISPARAR"
 align = 1
-percent_visible = -0.25
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1112,7 +1114,7 @@ shape = SubResource( 38 )
 [node name="MusicaFondo" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 43 )
 autoplay = true
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BotonAtras" to="." method="_on_BotonAtras_pressed"]
 [connection signal="pressed" from="CanvasLayer/Tirarse" to="." method="_on_Tirarse_pressed"]
 [connection signal="released" from="CanvasLayer/Disparar" to="." method="_on_Disparar_released"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_Area2D_body_entered"]

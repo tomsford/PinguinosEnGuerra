@@ -24,7 +24,8 @@ func _physics_process(delta):
 		ScriptGlobal.disparo_SP = true
 		ScriptGlobal.arma = 1
 		ScriptGlobal.explosion = 40
-		get_tree().get_nodes_in_group("recargar")[0].play()
+		if !ScriptGlobal.mute:
+			get_tree().get_nodes_in_group("recargar")[0].play()
 		$AnimationPlayer.play("Sacar_escopeta")
 		armapordefecto = false
 	if Input.is_action_pressed("lefft_mouse") and is_on_floor() and !ScriptGlobal.apuntando:

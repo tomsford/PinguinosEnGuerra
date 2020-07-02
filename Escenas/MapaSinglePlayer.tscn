@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=2]
+[gd_scene load_steps=105 format=2]
 
 [ext_resource path="res://Scripts/MapaSinglePlayer.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Destructable.gd" type="Script" id=2]
@@ -61,6 +61,7 @@
 [ext_resource path="res://Recursos/ModoSingle/cronometro.png" type="Texture" id=59]
 [ext_resource path="res://Recursos/BGM/Heroic Intrusion.ogg" type="AudioStream" id=60]
 [ext_resource path="res://Recursos/SFX/y2mate.com - Sonido Escopeta - Efecto de sonido_af2pn4Ww5HQ.wav" type="AudioStream" id=61]
+[ext_resource path="res://fuentes/Chunk Five Print.otf" type="DynamicFontData" id=62]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -875,6 +876,18 @@ font_data = ExtResource( 55 )
 size = 30
 font_data = ExtResource( 55 )
 
+[sub_resource type="DynamicFont" id=40]
+size = 20
+font_data = ExtResource( 62 )
+
+[sub_resource type="DynamicFont" id=41]
+size = 20
+font_data = ExtResource( 62 )
+
+[sub_resource type="DynamicFont" id=42]
+size = 20
+font_data = ExtResource( 62 )
+
 [node name="Mapa1" type="Control" groups=[
 "SinglePlayer",
 ]]
@@ -1142,10 +1155,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 539.106
-margin_top = 274.597
-margin_right = 707.106
-margin_bottom = 348.597
+margin_left = 545.5
+margin_top = 271.5
+margin_right = 727.5
+margin_bottom = 300.5
+custom_fonts/font = SubResource( 40 )
 text = "SALIR"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1157,11 +1171,27 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 541.31
-margin_top = 177.932
-margin_right = 708.31
-margin_bottom = 248.932
+margin_left = 545.5
+margin_top = 178.0
+margin_right = 729.5
+margin_bottom = 208.0
+custom_fonts/font = SubResource( 41 )
 text = "CONTINUAR"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicaONOFF" type="Button" parent="MenuPausa/Botones"]
+pause_mode = 2
+margin_left = 574.0
+margin_top = 250.0
+margin_right = 757.0
+margin_bottom = 279.0
+custom_fonts/font = SubResource( 42 )
+text = "MUSICA ON-OFF"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MenuArmas" type="Control" parent="."]
 margin_left = -158.562
@@ -1234,7 +1264,6 @@ __meta__ = {
 
 [node name="MusicaFondo" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 60 )
-autoplay = true
 
 [node name="Recargar" type="AudioStreamPlayer" parent="." groups=[
 "recargar",
@@ -1252,6 +1281,7 @@ stream = ExtResource( 61 )
 [connection signal="timeout" from="Spawn2/Timer" to="Spawn2" method="_on_Timer_timeout"]
 [connection signal="pressed" from="MenuPausa/Botones/Salir" to="." method="_on_Salir_pressed"]
 [connection signal="pressed" from="MenuPausa/Botones/Continuar" to="." method="_on_Continuar_pressed"]
+[connection signal="pressed" from="MenuPausa/Botones/MusicaONOFF" to="." method="_on_MusicaONOFF_pressed"]
 [connection signal="pressed" from="MenuArmas/Botones/Bazuca" to="." method="_on_Bazuca_pressed"]
 [connection signal="pressed" from="MenuArmas/Botones/Escopeta" to="." method="_on_Escopeta_pressed"]
 [connection signal="pressed" from="MenuArmas/Botones/Molotov" to="." method="_on_Molotov_pressed"]

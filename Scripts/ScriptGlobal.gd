@@ -61,6 +61,9 @@ const NIVEL_MAXIMO = 6
 var apuntando = false
 
 var reproducir = 0
+var reproducir2 = 0
+var mute = false
+var mutePrincipal = false
 var reproducirV = 0
 
 var balaActiva = false

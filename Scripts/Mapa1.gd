@@ -255,3 +255,7 @@ func actualizarHUD():
 	$CanvasLayer/Speed.text = "X " + str(ScriptGlobal.speed)
 	$CanvasLayer/Salto.text = "X " + str(ScriptGlobal.salto)
 	ScriptGlobal.actualizadoHUD = true
+
+
+func _on_BotonAtras_pressed():
+	ScriptGlobal.goto_scene("res://Escenas/Menu/PantallaMenu.tscn")

@@ -19,7 +19,8 @@ func _physics_process(delta):
 	$AnimationPlayer.play("caminar")
 	move_and_slide(posicao,grav)
 	
-	if(get_slide_collision(get_slide_count()-1)!= null):
+	#if(get_slide_collision(get_slide_count()-1)!= null):
+	if(get_slide_count()>0 and get_slide_collision(get_slide_count()-1)!= null):
 		var colisionador = get_slide_collision(get_slide_count()-1).collider
 		if(colisionador.is_in_group("player")):
 			_reproducir()
@@ -36,4 +37,5 @@ func _on_Timer_timeout():
 	posicao.y = -400
 
 func _reproducir():
-	$SFX/TocoEnemigo.play()
+	if !ScriptGlobal.mute:
+		$SFX/TocoEnemigo.play()

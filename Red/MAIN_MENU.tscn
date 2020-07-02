@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://fuentes/Chunk Five Print.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Red/MAIN_MENU.gd" type="Script" id=2]
 [ext_resource path="res://fuentes/ChunkFive-Regular.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://fuentes/28 Days Later.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 94
@@ -20,15 +21,19 @@ size = 72
 outline_size = 4
 font_data = ExtResource( 3 )
 
+[sub_resource type="DynamicFont" id=4]
+size = 50
+font_data = ExtResource( 4 )
+
 [node name="Control" type="Control" groups=[
 "Menu",
 ]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 3.6832
-margin_top = -71.2088
+margin_top = 8.48157
 margin_right = 3.68323
-margin_bottom = -71.2088
+margin_bottom = 8.48157
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -243,6 +248,15 @@ disabled = true
 action_mode = 0
 text = "..."
 flat = true
+
+[node name="BotonAtras" type="Button" parent="."]
+margin_right = 12.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 4 )
+text = "ATRAS"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Main Panel/VBoxContainer/Create" to="." method="_on_Create_pressed"]
 [connection signal="pressed" from="Main Panel/VBoxContainer/Join" to="." method="_on_Join_pressed"]
 [connection signal="pressed" from="SERVER PANEL/VBoxContainer/Cant_Players2" to="." method="_on_Cant_Players2_pressed"]
@@ -254,3 +268,4 @@ flat = true
 [connection signal="pressed" from="PLAYERS PANEL/VBoxContainer/Player3_Status" to="." method="_on_Player3_Status_pressed"]
 [connection signal="pressed" from="PLAYERS PANEL/VBoxContainer/Player4_Status" to="." method="_on_Player4_Status_pressed"]
 [connection signal="pressed" from="PLAYERS PANEL/VBoxContainer/START SERVER" to="." method="_on_START_SERVER_pressed"]
+[connection signal="pressed" from="BotonAtras" to="." method="_on_BotonAtras_pressed"]

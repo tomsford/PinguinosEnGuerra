@@ -13,6 +13,9 @@ func _ready():
 	ScriptGlobal.update_puntos() #SE ACTUALIZA CUANDO CHOCA CON EL ENEMIGO, AHORA ESTA TIRO CUANDO CHOCA CON CUALQUIER COSA PA PROBAR
 	ScriptGlobal.update_time()
 	ScriptGlobal.update_vida()
+
+	if !ScriptGlobal.mute:
+		$MusicaFondo.play(ScriptGlobal.reproducir2)
 	
 	var newEnemy = enemigo.instance()
 	get_tree().get_nodes_in_group("SinglePlayer")[0].add_child(newEnemy)
@@ -100,7 +103,8 @@ func _on_Bazuca_pressed():
 		ScriptGlobal.arma = 2
 		ScriptGlobal.explosion = 45
 		$CanvasLayer/Arma.frame = 1
-		$Recargar.play()
+		if !ScriptGlobal.mute:
+			$Recargar.play()
 		$Pinguino/AnimationPlayer.play("Sacar_Bazuca")
 
 func _on_Escopeta_pressed():
@@ -112,7 +116,8 @@ func _on_Escopeta_pressed():
 			ScriptGlobal.arma = 1
 			ScriptGlobal.explosion = 40
 			$CanvasLayer/Arma.frame = 0
-			$Recargar.play()
+			if !ScriptGlobal.mute:
+				$Recargar.play()
 			$Pinguino/AnimationPlayer.play("Sacar_escopeta")
 			
 
@@ -165,22 +170,16 @@ func setearNivel():
 	ScriptGlobal.disparo = 1
 
 
-
-#FUNCION PROCESS COMO ESTABA ANTES QUE EMPIECE A TOCAR
-#func _physics_process(delta):
-#if (ScriptGlobal.puntos >= 5 and !activo):
-#		$Spawn2/Timer.start(7)
-#		activo = true
-#	if ScriptGlobal.puntos >= 10:
-#		ScriptGlobal.velocidad = 75
-#	if ScriptGlobal.puntos >= 20:
-#		ScriptGlobal.velocidad = 100
-#
-#	if (ScriptGlobal.puntos % 5 == 0) and ScriptGlobal.puntos != 0:
-#		if !cambio:
-#			ScriptGlobal.tiempo += 20
-#			#ScriptGlobal.update_time()
-#			cambio = true
-#	else: 
-#		cambio = false
-
+func _on_MusicaONOFF_pressed():
+	
+	if get_tree().paused == true:
+		get_tree().paused = false
+		$MenuPausa/Efecto.interpolate_property($MenuPausa/Botones,"rect_position",$MenuPausa/Botones.rect_position,$MenuPausa/Botones.rect_position-Vector2(750,0),1,Tween.TRANS_BACK,Tween.EASE_IN)
+		$MenuPausa/Efecto.start()
+		if ScriptGlobal.mute == false:
+			ScriptGlobal.mute = true
+			ScriptGlobal.reproducir2 = $MusicaFondo.get_playback_position()
+			$MusicaFondo.stop()
+		else:
+			$MusicaFondo.play(ScriptGlobal.reproducir2)
+			ScriptGlobal.mute = false

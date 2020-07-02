@@ -82,3 +82,7 @@ func _on_Start_Scene():
 	ScriptGlobal.goto_scene("res://Escenas/Mapa1.tscn")
 	#print(get_tree().change_scene("res://Escenas/Menu/Instrucciones.tscn"))
 	ScriptGlobal.LAN =true
+
+
+func _on_BotonAtras_pressed():
+	ScriptGlobal.goto_scene("res://Escenas/Menu/PantallaMenu.tscn")

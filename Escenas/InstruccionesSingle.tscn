@@ -1,0 +1,131 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scripts/InstruccionesSingle.gd" type="Script" id=1]
+[ext_resource path="res://Recursos/fondos/31314.jpg" type="Texture" id=2]
+[ext_resource path="res://Recursos/BGM/Arex's Beat.ogg" type="AudioStream" id=3]
+[ext_resource path="res://fuentes/28 Days Later.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Sprites/boton1.png" type="Texture" id=5]
+[ext_resource path="res://Recursos/ModoSingle/Salto.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/boton4.png" type="Texture" id=7]
+[ext_resource path="res://Recursos/ModoSingle/CambioArma.png" type="Texture" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 110
+font_data = ExtResource( 4 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 106.361, 197.196 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+margin_left = 197.415
+margin_top = 173.661
+margin_right = 654.415
+margin_bottom = 216.661
+custom_fonts/font = SubResource( 1 )
+text = "HABILITAR EL DISPARO"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Instrucciones" type="Label" parent="CanvasLayer"]
+anchor_right = 1.0
+margin_bottom = 94.0
+custom_fonts/font = SubResource( 2 )
+text = "INSTRUCCIONES:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite2" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 110.037, 413.37 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 8 )
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+margin_left = 197.415
+margin_top = 253.661
+margin_right = 1105.42
+margin_bottom = 342.661
+custom_fonts/font = SubResource( 1 )
+text = "LUEGO DE HABILITAR EL DISPARO TOCAR LA 
+PANTALLA PARA DISPARAR"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label5" type="Label" parent="CanvasLayer"]
+margin_left = 197.415
+margin_top = 389.661
+margin_right = 654.415
+margin_bottom = 432.661
+custom_fonts/font = SubResource( 1 )
+text = "CAMBIAR EL ARMA"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="CanvasLayer"]
+margin_left = 197.415
+margin_top = 509.661
+margin_right = 654.415
+margin_bottom = 552.661
+custom_fonts/font = SubResource( 1 )
+text = "SALTAR"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite3" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 199.711, 629.196 )
+scale = Vector2( 0.34, 0.34 )
+texture = ExtResource( 5 )
+
+[node name="Sprite4" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 106.361, 629.196 )
+rotation = 3.14159
+scale = Vector2( 0.34, 0.34 )
+texture = ExtResource( 5 )
+
+[node name="Sprite5" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 113.009, 527.168 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 6 )
+
+[node name="Label3" type="Label" parent="CanvasLayer"]
+margin_left = 285.415
+margin_top = 605.661
+margin_right = 742.415
+margin_bottom = 648.661
+custom_fonts/font = SubResource( 1 )
+text = "mirar para los lados"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicaFondo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )

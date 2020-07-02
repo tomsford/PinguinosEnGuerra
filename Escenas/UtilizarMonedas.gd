@@ -3,8 +3,8 @@ extends Control
 var monedasParaCambiar = 0
 
 func _ready():
-	$MusicaFondo.play(ScriptGlobal.reproducir)
-	pass # Replace with function body.
+	if !ScriptGlobal.mutePrincipal:
+		$MusicaFondo.play(ScriptGlobal.reproducir)
 
 func _physics_process(delta):
 	$CambioMonedas.text = str(monedasParaCambiar)
@@ -24,9 +24,8 @@ func _on_Cambiar_pressed():
 		ScriptGlobal.vida += monedasParaCambiar * 10
 		ScriptGlobal.puntos -= monedasParaCambiar
 		monedasParaCambiar = 0
-		
-
 
 func _on_Seguir_pressed():
-	ScriptGlobal.reproducir = $MusicaFondo.get_playback_position()
+	if !ScriptGlobal.mutePrincipal:
+		ScriptGlobal.reproducir = $MusicaFondo.get_playback_position()
 	ScriptGlobal.goto_scene("res://Escenas/publicidad.tscn")
