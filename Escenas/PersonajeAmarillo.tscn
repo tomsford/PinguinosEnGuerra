@@ -4,8 +4,8 @@
 [ext_resource path="res://Scripts/Personaje.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 17.2918
-height = 71.26
+radius = 19.4199
+height = 58.7481
 
 [sub_resource type="Animation" id=2]
 resource_name = "Caer"
@@ -130,8 +130,8 @@ hframes = 8
 frame = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 5.4144, -4.44403 )
-rotation = 0.213034
+position = Vector2( 4.28234, 2.34833 )
+rotation = 0.0585357
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -153,7 +153,7 @@ wait_time = 1.024
 position = Vector2( 51.4564, -16.172 )
 
 [node name="Pos_Bomba" type="Position2D" parent="."]
-position = Vector2( -35.0052, -63.9735 )
+position = Vector2( -34.2505, -71.5206 )
 
 [node name="CamaraPinguino" type="Camera2D" parent="." groups=[
 "camara",
@@ -164,5 +164,4 @@ limit_right = 6450
 limit_bottom = 725
 
 [node name="Timer" type="Timer" parent="."]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="explosion_cooldown" to="." method="_on_explosion_cooldown_timeout"]

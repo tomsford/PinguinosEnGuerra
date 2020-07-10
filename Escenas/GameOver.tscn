@@ -4,7 +4,7 @@
 [ext_resource path="res://Escenas/GameOver.gd" type="Script" id=2]
 [ext_resource path="res://fuentes/28 Days Later.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Recursos/fondos/negro.jpg" type="Texture" id=4]
-[ext_resource path="res://Recursos/BGM/y2mate.com - música para sentirse derrotado sin copyright_AyC81TN8erg.wav" type="AudioStream" id=5]
+[ext_resource path="res://Recursos/BGM/y2mate.com - m｣sica para sentirse derrotado sin copyright_AyC81TN8erg.wav" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 150
@@ -79,7 +79,6 @@ margin_right = -1.33948
 margin_bottom = -35.8884
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "puntaje final  0 "
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

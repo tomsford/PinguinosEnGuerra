@@ -23,12 +23,24 @@ var regaloGris = preload("res://Escenas/RegaloGris.tscn")
 var yacreeenemy=false
 var enemy=null
 
-
 var caido = false
 var seteadoArmas = false
+var seteadoArmasD = false
 var seteadoRegalos = false
+var seteadoRegalosD = false
 
-var posicionesArmas = { 
+var TodoListo = false
+
+var listoJugador = false
+var numerosArmas = []
+var numerosArmasD = []
+var numerosRegalos = []
+var numerosRegalosD = []
+
+var setTimer=false
+var comenzoPreturno=false
+
+var posicionesArmas = { #Armas izquierda
 						"a" : Vector2(1311.225,295.707),
 						"b" : Vector2(1576.033,295.891),
 						"c" : Vector2(119.513,580.499),
@@ -37,6 +49,16 @@ var posicionesArmas = {
 						"f" : Vector2(2437.03,580.499),
 						"g" : Vector2(2245.697,166.917),
 						"h" : Vector2(2968.271,101.868)}
+
+var posicionesArmasD = { 
+						"a" : Vector2(6148.86,464.902),
+						"b" : Vector2(5399.028,582.045),
+						"c" : Vector2(5023.32,231.626),
+						"d" : Vector2(4782.001,582.767),
+						"e" : Vector2(4524.408,323.856),
+						"f" : Vector2(4193.02,132.362),
+						"g" : Vector2(3591.019,581.856),
+						"h" : Vector2(4026.754,455.723)}
 
 var posicionesRegalosIzquierda = { 
 						"b" : Vector2(2892.866,294.838),
@@ -50,13 +72,60 @@ var posicionesRegalosIzquierda = {
 						"j" : Vector2(1165.344,294.696),
 						"k" : Vector2(857.557,582.252),
 						"l" : Vector2(837.731,102.431),
-						"m" : Vector2(429.789,486.23),
-						"n" : Vector2(238.839,295.28),
-						"o" : Vector2(25.771,582.646)}
+						"m" : Vector2(238.839,295.28)}
+
+var posicionesRegalosD = { 
+						"b" : Vector2(6022.533,581.454),
+						"c" : Vector2(6092.789,102.61),
+						"d" : Vector2(5572.345,580.53),
+						"e" : Vector2(5134.176,293.963),
+						"f" : Vector2(4540.431,581.454),
+						"g" : Vector2(4556.214,198.748),
+						"h" : Vector2(4333.052,133.115),
+						"i" : Vector2(4202.333,325.465),
+						"j" : Vector2(3820.186,581.704),
+						"k" : Vector2(3658.119,420.894),
+						"l" : Vector2(3418.789,517.631),
+						"m" : Vector2(3438.263,134.452)}
+
+func _ready():
+	$CanvasLayer/HUD_Enemy/nombreEne.text = ScriptGlobal.nombreEnemy
+	if Network.players_IDS[0] != Network.local_player_id:
+		$RigidBody2D.scale.x = -1
+		$RigidBody2D.position.x = 6750.701
+		$ControlListo.rect_position.x = 5120
+		$ControlEsperando.rect_position.x = 5120
 
 func _physics_process(delta):
 	
 	var mob
+	
+	if ScriptGlobal.LAN && ScriptGlobal.tiempoMultiJugador == 0 && Network.last_movement_id==Network.local_player_id && !ScriptGlobal.preTurno:
+		ScriptGlobal.preTurno=true
+		print ("SE TERMINO EL TIEMPO, CAMBIA TURNO")
+		#Network.sendCambiarTurno()
+		
+	if Network.llegoDano:
+		ScriptGlobal.vida-=Network.dano
+		Network.llegoDano=false	
+		ScriptGlobal.actualizadoHUD=false
+		
+	if Network.actualizar_vida_enemy:
+		$CanvasLayer/HUD_Enemy/Vida_Enemy.text=String(Network.vida_enemy)
+		Network.actualizar_vida_enemy=false
+	
+	if ScriptGlobal.preTurno && !comenzoPreturno:
+		print ("tengo q arrancar el timer: PreTurno")
+		$pre_Turno.start()
+		comenzoPreturno=true
+	
+	if ScriptGlobal.vida<=0:
+		ScriptGlobal.goto_scene("res://Escenas/GameOver.tscn")
+	
+	if Network.vida_enemy<=0:
+		ScriptGlobal.goto_scene("res://Escenas/Victoria.tscn")
+	
+	comprobarDisparo()
 	
 	if ScriptGlobal.tocoArma:
 		match ScriptGlobal.arma:
@@ -72,22 +141,46 @@ func _physics_process(delta):
 	if !ScriptGlobal.actualizadoHUD :
 		actualizarHUD()
 	
-	if !seteadoArmas:
+	if !seteadoArmas && !seteadoArmasD && !seteadoRegalos && !seteadoRegalosD && Network.players_IDS[0] == Network.local_player_id :
 		setearArmas()
-	
-	if !seteadoRegalos:
 		setearRegalos()
+		setearArmasD()
+		setearRegalosD()
 	
-	$RigidBody2D.position.x += 3
+	if !seteadoArmas && !seteadoArmasD && Network.crearArmas:
+		setearArmasDelServer()
+		setearArmasDelServerD()
 	
+	if !seteadoRegalos && !seteadoRegalosD && Network.crearRegalos:
+		setearRegalosDelServer()
+		setearRegalosDelServerD()
+	
+	if TodoListo && Network.players_IDS[0] == Network.local_player_id:
+		$RigidBody2D.position.x += 3
+	else :
+		verificarTodoListo()
 
+	if TodoListo && Network.players_IDS[0] != Network.local_player_id:
+		$RigidBody2D.position.x -= 3
+	else :
+		verificarTodoListo()
 	if ScriptGlobal.LAN && Network.ready1 && Network.ready2 && caido && !yacreeenemy :
-		enemy = playerA.instance()
+		match Network.colorEnemy:
+			1:
+				enemy = playerA.instance()
+			2:
+				enemy = playerR.instance()
+			3:
+				enemy = playerV.instance()
+			4:
+				enemy = player.instance()
 		enemy.soyEnemy = true
+		
 		if Network.players_IDS[0]==Network.local_player_id: 
 			enemy.id = Network.players_IDS[1]#cambiar, mal para segundo player
 		else:
 			enemy.id = Network.players_IDS[0]
+		
 		#enemy.position = Vector2(Network.posIniX,Network.posIniX)
 		enemy.global_position.x = Network.posIniX
 		enemy.global_position.y = Network.posIniY
@@ -98,10 +191,19 @@ func _physics_process(delta):
 		print ("CREE ENEMIGO CON POSICION en Y:")
 		print (Network.posIniY)
 		ScriptGlobal.partida_ready = true
-	if ScriptGlobal.LAN && ScriptGlobal.partida_ready:
-		$CanvasLayer/Turno.text = "TURNO DE:\nPlayer"+str(Network.last_movement_id)
+	if ScriptGlobal.LAN && ScriptGlobal.partida_ready :
+		if !setTimer:
+			print("ARRANCA EL TIEMPO")
+			$Timer.start()
+			setTimer = true
 		if Network.last_movement_id == Network.local_player_id: #My turn
-			$CanvasLayer/Turno.text += "\n(TU)"
+			$CanvasLayer/TurnoSprite/AnimatedSprite.play("esTuTurno")
+			CamaraGeneral.cambioTurno(get_tree().get_nodes_in_group("camara")[1])
+		else:
+			$CanvasLayer/TurnoSprite/AnimatedSprite.play("NoEsTuTurno")
+			CamaraGeneral.cambioTurno(get_tree().get_nodes_in_group("camara")[2])
+		$CanvasLayer/TurnoSprite.visible = true
+		
 
 func setearArmas():
 	var newArma
@@ -121,33 +223,91 @@ func setearArmas():
 			#Escopeta
 			newArma = escopeta.instance()
 			maxescopeta += 1
+			numerosArmas.append(1)
 			print("creo escopeta")
 		elif (random > 0.5 && maxbazuca < 2) || (maxescopeta == 2 && maxmolotov == 2 && maxbomba == 2):
 			#Bazuca
 			newArma = bazuca.instance() 
 			maxbazuca += 1
+			numerosArmas.append(2)
 			print("creo bazuca")
 		elif (random > 0.25 && maxmolotov < 2) || (maxescopeta == 2 && maxbazuca == 2 && maxbomba == 2):
 			#Molotov
 			newArma = molotov.instance() 
 			maxmolotov += 1
+			numerosArmas.append(3)
 			print("creo molotov")
 		elif (maxbomba < 2) || (maxescopeta == 2 && maxbazuca == 2 && maxmolotov == 2) :
 			#Bomba
 			newArma = bomba.instance() 
 			maxbomba += 1
+			numerosArmas.append(4)
 			print("creo bomba")
 		elif (maxbazuca < 2) || (maxescopeta == 2 && maxmolotov == 2 && maxbomba == 2):
 			#Bazuca
 			newArma = bazuca.instance() 
 			maxbazuca += 1
 			print("creo bazuca")
+			numerosArmas.append(2)
 			
 		newArma.position = posicionesArmas[i]
 
 		get_parent().add_child(newArma)
 		
+	#enviarArmas()
 	seteadoArmas = true
+
+func setearArmasD():
+	var newArma
+	var random
+	var rng = RandomNumberGenerator.new()
+	var maxescopeta = 0
+	var maxbazuca = 0
+	var maxmolotov = 0
+	var maxbomba = 0
+	
+	for i in  posicionesArmasD:
+		#print(posicionesArmas[i])
+		rng.randomize()
+		random = rng.randf_range(0, 1)
+		
+		if (random > 0.75 && maxescopeta < 2) || (maxbazuca == 2 && maxmolotov == 2 && maxbomba == 2):
+			#Escopeta
+			newArma = escopeta.instance()
+			maxescopeta += 1
+			numerosArmasD.append(1)
+			print("creo escopeta")
+		elif (random > 0.5 && maxbazuca < 2) || (maxescopeta == 2 && maxmolotov == 2 && maxbomba == 2):
+			#Bazuca
+			newArma = bazuca.instance() 
+			maxbazuca += 1
+			numerosArmasD.append(2)
+			print("creo bazuca")
+		elif (random > 0.25 && maxmolotov < 2) || (maxescopeta == 2 && maxbazuca == 2 && maxbomba == 2):
+			#Molotov
+			newArma = molotov.instance() 
+			maxmolotov += 1
+			numerosArmasD.append(3)
+			print("creo molotov")
+		elif (maxbomba < 2) || (maxescopeta == 2 && maxbazuca == 2 && maxmolotov == 2) :
+			#Bomba
+			newArma = bomba.instance() 
+			maxbomba += 1
+			numerosArmasD.append(4)
+			print("creo bomba")
+		elif (maxbazuca < 2) || (maxescopeta == 2 && maxmolotov == 2 && maxbomba == 2):
+			#Bazuca
+			newArma = bazuca.instance() 
+			maxbazuca += 1
+			print("creo bazuca")
+			numerosArmasD.append(2)
+			
+		newArma.position = posicionesArmasD[i]
+
+		get_parent().add_child(newArma)
+		
+	enviarArmas()
+	seteadoArmasD = true
 
 func setearRegalos():
 	var newRegalo
@@ -161,7 +321,7 @@ func setearRegalos():
 	var maxVerde = 0
 	var maxVerdeAgua = 0
 	var maxVioleta = 0
-	var maxGris = 0
+	#var maxGris = 0
 	
 	if (maxAmarillo < 1):
 			#RegaloAmarillo
@@ -176,52 +336,141 @@ func setearRegalos():
 		rng.randomize()
 		random = rng.randf_range(0, 1)
 		
-		if (random > 0.8 && maxGris < 2) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRojo == 2 && maxRosa == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxVioleta == 2):
-			#RegaloGris
-			newRegalo = regaloGris.instance()
-			maxGris += 1
-			#print("creo Gris")
-		elif (random > 0.7 && maxVioleta < 2) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRojo == 2 && maxRosa == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxGris == 2):
+#		if (random > 0.8 && maxGris < 2) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRojo == 2 && maxRosa == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxVioleta == 2):
+#			#RegaloGris
+#			newRegalo = regaloGris.instance()
+#			maxGris += 1
+#			numerosRegalos.append(1)
+#			#print("creo Gris")
+		if (random > 0.7 && maxVioleta < 2) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRojo == 2 && maxRosa == 2 && maxVerde == 1 && maxVerdeAgua == 1):
 			#RegaloVioleta
 			newRegalo = regaloVioleta.instance()
 			maxVioleta += 1
+			numerosRegalos.append(2)
 			#print("creo Violeta")
-		elif (random > 0.6 && maxVerdeAgua < 1) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRojo == 2 && maxRosa == 2 && maxVerde == 1 && maxVioleta == 2 && maxGris == 2):
+		elif (random > 0.6 && maxVerdeAgua < 1) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRojo == 2 && maxRosa == 2 && maxVerde == 1 && maxVioleta == 2):
 			#RegaloVerdeAgua
 			newRegalo = regaloVerdeAgua.instance()
 			maxVerdeAgua += 1
+			numerosRegalos.append(3)
 			#print("creo VerdeAgua")
-		elif (random > 0.5 && maxVerde < 1) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRojo == 2 && maxRosa == 2 && maxVerdeAgua == 1 && maxVioleta == 2 && maxGris == 2):
+		elif (random > 0.5 && maxVerde < 1) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRojo == 2 && maxRosa == 2 && maxVerdeAgua == 1 && maxVioleta == 2):
 			#RegaloVerde
 			newRegalo = regaloVerde.instance()
 			maxVerde += 1
+			numerosRegalos.append(4)
 			#print("creo Verde")
-		elif (random > 0.4 && maxRosa < 2) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRojo == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxVioleta == 2 && maxGris == 2):
+		elif (random > 0.4 && maxRosa < 2) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRojo == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxVioleta == 2 ):
 			#RegaloRosa
 			newRegalo = regaloRosa.instance()
 			maxRosa += 1
+			numerosRegalos.append(5)
 			#print("creo Rosa")
-		elif (random > 0.3 && maxRojo < 2) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRosa == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxVioleta == 2 && maxGris == 2):
+		elif (random > 0.3 && maxRojo < 2) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRosa == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxVioleta == 2):
 			#RegaloRojo
 			newRegalo = regaloRojo.instance()
 			maxRojo += 1
+			numerosRegalos.append(6)
 			#print("creo Rojo")
-		elif (random > 0.2 && maxNaranja < 2) || (maxAmarillo == 1 && maxAzul == 2 && maxRojo == 2 && maxRosa == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxVioleta == 2 && maxGris == 2):
+		elif (random > 0.2 && maxNaranja < 2) || (maxAmarillo == 1 && maxAzul == 2 && maxRojo == 2 && maxRosa == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxVioleta == 2 ):
 			#RegaloNaranja
 			newRegalo = regaloNaranja.instance()
 			maxNaranja += 1
+			numerosRegalos.append(7)
 			#print("creo Naranja")
-		elif ((maxAzul < 2) || (maxAmarillo == 1 && maxNaranja == 2 && maxRojo == 2 && maxRosa == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxVioleta == 2 && maxGris == 2)):
+		elif ((maxAzul < 2) || (maxAmarillo == 1 && maxNaranja == 2 && maxRojo == 2 && maxRosa == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxVioleta == 2 )):
 			#RegaloAzul
 			newRegalo = regaloAzul.instance()
 			maxAzul += 1
+			numerosRegalos.append(8)
 			#print("creo Azul")
+		else:
+			newRegalo = regaloRosa.instance()
+			maxRosa += 1
+			numerosRegalos.append(5)
 		
 		
 		newRegalo.position = posicionesRegalosIzquierda[i]
 		get_parent().add_child(newRegalo)
+		print(i)
 		
+	
+	#enviarRegalos()
 	seteadoRegalos = true
+
+func setearRegalosD():
+	var newRegalo
+	var random
+	var rng = RandomNumberGenerator.new()
+	var maxAmarillo = 1
+	var maxAzul = 0
+	var maxNaranja = 0
+	var maxRojo = 0
+	var maxRosa = 0
+	var maxVerde = 0
+	var maxVerdeAgua = 0
+	var maxVioleta = 0
+	
+	for i in  posicionesRegalosD:
+
+		rng.randomize()
+		random = rng.randf_range(0, 1)
+		
+		if (random > 0.7 && maxVioleta < 2) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRojo == 2 && maxRosa == 2 && maxVerde == 1 && maxVerdeAgua == 1):
+			#RegaloVioleta
+			newRegalo = regaloVioleta.instance()
+			maxVioleta += 1
+			numerosRegalosD.append(2)
+			#print("creo Violeta")
+		elif (random > 0.6 && maxVerdeAgua < 1) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRojo == 2 && maxRosa == 2 && maxVerde == 1 && maxVioleta == 2):
+			#RegaloVerdeAgua
+			newRegalo = regaloVerdeAgua.instance()
+			maxVerdeAgua += 1
+			numerosRegalosD.append(3)
+			#print("creo VerdeAgua")
+		elif (random > 0.5 && maxVerde < 1) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRojo == 2 && maxRosa == 2 && maxVerdeAgua == 1 && maxVioleta == 2):
+			#RegaloVerde
+			newRegalo = regaloVerde.instance()
+			maxVerde += 1
+			numerosRegalosD.append(4)
+			#print("creo Verde")
+		elif (random > 0.4 && maxRosa < 2) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRojo == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxVioleta == 2 ):
+			#RegaloRosa
+			newRegalo = regaloRosa.instance()
+			maxRosa += 1
+			numerosRegalosD.append(5)
+			#print("creo Rosa")
+		elif (random > 0.3 && maxRojo < 2) || (maxAmarillo == 1 && maxAzul == 2 && maxNaranja == 2 && maxRosa == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxVioleta == 2):
+			#RegaloRojo
+			newRegalo = regaloRojo.instance()
+			maxRojo += 1
+			numerosRegalosD.append(6)
+			#print("creo Rojo")
+		elif (random > 0.2 && maxNaranja < 2) || (maxAmarillo == 1 && maxAzul == 2 && maxRojo == 2 && maxRosa == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxVioleta == 2 ):
+			#RegaloNaranja
+			newRegalo = regaloNaranja.instance()
+			maxNaranja += 1
+			numerosRegalosD.append(7)
+			#print("creo Naranja")
+		elif ((maxAzul < 2) || (maxAmarillo == 1 && maxNaranja == 2 && maxRojo == 2 && maxRosa == 2 && maxVerde == 1 && maxVerdeAgua == 1 && maxVioleta == 2 )):
+			#RegaloAzul
+			newRegalo = regaloAzul.instance()
+			maxAzul += 1
+			numerosRegalosD.append(8)
+			#print("creo Azul")
+		else:
+			newRegalo = regaloRosa.instance()
+			maxRosa += 1
+			numerosRegalosD.append(5)
+		
+		
+		newRegalo.position = posicionesRegalosD[i]
+		get_parent().add_child(newRegalo)
+		print(i)
+		
+	
+	enviarRegalos()
+	seteadoRegalosD = true
 
 func _on_Button_pressed():
 	ScriptGlobal.goto_scene("res://Escenas/Menu/PantallaMenu.tscn")
@@ -255,7 +504,284 @@ func actualizarHUD():
 	$CanvasLayer/Speed.text = "X " + str(ScriptGlobal.speed)
 	$CanvasLayer/Salto.text = "X " + str(ScriptGlobal.salto)
 	ScriptGlobal.actualizadoHUD = true
-
+	var data = {
+		vida=ScriptGlobal.vida
+	}
+	Network.send_cambioVida(data)
 
 func _on_BotonAtras_pressed():
 	ScriptGlobal.goto_scene("res://Escenas/Menu/PantallaMenu.tscn")
+
+func _on_Listo_pressed():
+	$ControlListo.visible = false
+	$ControlEsperando.visible = true
+	$ControlEsperando/Esperando/Label/AnimationPlayer.play("Esperando")
+	listoJugador = true
+
+func enviarArmas():
+	var data= {
+				posiciones = numerosArmas,
+				posicionesD  = numerosArmasD
+			}
+	print("numeros armass")
+	print(numerosArmas)
+	Network.send_armas(data)
+
+func enviarRegalos():
+	var data= {
+				posiciones = numerosRegalos,
+				posicionesD = numerosRegalosD
+			}
+	print("numeros regalos")
+	print(numerosRegalos)
+	Network.send_regalos(data)
+
+func verificarTodoListo():
+	if seteadoArmas && seteadoArmasD && seteadoRegalos && seteadoRegalosD && listoJugador:
+		if Network.players_IDS[0] == Network.local_player_id :
+			Network.readyMapa = true
+			Network.send_ListoMapa()
+		else :
+			Network.readyMapa2 = true
+			Network.send_ListoMapa()
+		if Network.readyMapa && Network.readyMapa2 :
+			TodoListo = true
+			$ControlEsperando.visible = false
+
+func setearArmasDelServer():
+	print("tengo que setear armas que vinieron")
+	var newArma
+	var j=0
+
+	for i in  posicionesArmas:
+		match Network.posArmas[j] :
+			1:
+				newArma = escopeta.instance()
+				print("creo escopeta")
+			2:
+				newArma = bazuca.instance() 
+			3:
+				newArma = molotov.instance() 
+			4:
+				newArma = bomba.instance() 
+			
+		newArma.position = posicionesArmas[i]
+		get_parent().add_child(newArma)
+		j+=1
+	seteadoArmas = true
+
+func setearArmasDelServerD():
+	print("tengo que setear armas que vinieron")
+	var newArma
+	var j=0
+
+	for i in  posicionesArmasD:
+		match Network.posArmasD[j]:
+			1:
+				newArma = escopeta.instance()
+				print("creo escopeta")
+			2:
+				newArma = bazuca.instance() 
+			3:
+				newArma = molotov.instance() 
+			4:
+				newArma = bomba.instance() 
+			
+		newArma.position = posicionesArmasD[i]
+		get_parent().add_child(newArma)
+		j+=1
+	seteadoArmasD = true
+
+func setearRegalosDelServer():
+	print("tengo que setear regalos que vinieron")
+	var newRegalo
+	var maxAmarillo = 0
+	var j=0
+
+	if (maxAmarillo < 1):
+			#RegaloAmarillo
+			newRegalo = regaloAmarillo.instance()
+			maxAmarillo += 1
+			#print("creo Amarillo")
+			newRegalo.position = Vector2(3213.919,166.417)
+			get_parent().add_child(newRegalo)
+	
+	for i in  posicionesRegalosIzquierda:
+		#print(posicionesRegalosIzquierda[i])
+		match Network.posRegalos[j]:
+			2:
+				newRegalo = regaloVioleta.instance()
+			3:
+				newRegalo = regaloVerdeAgua.instance()
+			4:
+				newRegalo = regaloVerde.instance()
+			5:
+				newRegalo = regaloRosa.instance()
+			6:
+				newRegalo = regaloRojo.instance()
+				print("creo rojo")
+			7:
+				newRegalo = regaloNaranja.instance()
+			8:
+				newRegalo = regaloAzul.instance()
+		
+		newRegalo.position = posicionesRegalosIzquierda[i]
+		get_parent().add_child(newRegalo)
+		j+=1
+		
+	seteadoRegalos = true
+
+func setearRegalosDelServerD():
+	print("tengo que setear regalos que vinieron")
+	var newRegalo
+	var maxAmarillo = 1
+	var j=0
+
+	if (maxAmarillo < 1):
+			#RegaloAmarillo
+			newRegalo = regaloAmarillo.instance()
+			maxAmarillo += 1
+			#print("creo Amarillo")
+			newRegalo.position = Vector2(3213.919,166.417)
+			get_parent().add_child(newRegalo)
+	
+	for i in  posicionesRegalosD:
+		#print(posicionesRegalosIzquierda[i])
+		match Network.posRegalosD[j]:
+			2:
+				newRegalo = regaloVioleta.instance()
+			3:
+				newRegalo = regaloVerdeAgua.instance()
+			4:
+				newRegalo = regaloVerde.instance()
+			5:
+				newRegalo = regaloRosa.instance()
+			6:
+				newRegalo = regaloRojo.instance()
+				print("creo rojo")
+			7:
+				newRegalo = regaloNaranja.instance()
+			8:
+				newRegalo = regaloAzul.instance()
+		
+		newRegalo.position = posicionesRegalosD[i]
+		get_parent().add_child(newRegalo)
+		j+=1
+		
+	seteadoRegalosD = true
+
+
+func _on_Timer_timeout():
+	if ScriptGlobal.tiempoMultiJugador > 0:
+		ScriptGlobal.tiempoMultiJugador -= 1
+		ScriptGlobal.update_timeM()
+		
+
+
+func _on_cambioArma_pressed():
+	if $CanvasLayer/MenuArmas.visible:
+		$CanvasLayer/MenuArmas.visible = false
+	else:
+		if Network.last_movement_id == Network.local_player_id:
+			if ScriptGlobal.tiros > 0 && ScriptGlobal.agarroMolotov:
+				$CanvasLayer/MenuArmas/molotov.visible = true
+			else:
+				$CanvasLayer/MenuArmas/molotov.visible = false
+			if ScriptGlobal.tiros > 0 && ScriptGlobal.agarroBomba:
+				$CanvasLayer/MenuArmas/bomba.visible = true
+			else:
+				$CanvasLayer/MenuArmas/bomba.visible = false
+			if ScriptGlobal.agarroEscopeta:
+				$CanvasLayer/MenuArmas/escopeta.visible = true
+			else:
+				$CanvasLayer/MenuArmas/escopeta.visible = false
+			if ScriptGlobal.agarroBazuca && ScriptGlobal.balas > 0:
+				$CanvasLayer/MenuArmas/bazuca.visible = true
+			else:
+				$CanvasLayer/MenuArmas/bazuca.visible = false
+			$CanvasLayer/MenuArmas.visible = true # Replace with function body.
+	if !$CanvasLayer/MenuArmas/escopeta.visible && !$CanvasLayer/MenuArmas/bazuca.visible && !$CanvasLayer/MenuArmas/molotov.visible && !$CanvasLayer/MenuArmas/bomba.visible:
+		$CanvasLayer/Disparar.visible = false
+	else:
+		$CanvasLayer/Disparar.visible = true
+
+func _on_escopeta_pressed():
+	$CanvasLayer/MenuArmas.visible = false
+	ScriptGlobal.arma = 1
+
+func _on_bazuca_pressed():
+	$CanvasLayer/MenuArmas.visible = false 
+	ScriptGlobal.arma = 2
+
+func _on_molotov_pressed():
+	$CanvasLayer/MenuArmas.visible = false
+	ScriptGlobal.arma = 3
+
+func _on_bomba_pressed():
+	$CanvasLayer/MenuArmas.visible = false
+	ScriptGlobal.arma = 4
+
+
+func _on_LimiteIzq_body_entered(body):
+	if !caido:
+		_on_Tirarse_pressed()
+
+
+func _on_LimiteDer_body_entered(body):
+	if !caido:
+		_on_Tirarse_pressed()
+
+
+func _on_pisopiso_body_entered(body):
+	if body.is_in_group("pinguino") && !body.is_in_group("enemigo"):
+			ScriptGlobal.vida -= 50
+			ScriptGlobal.actualizadoHUD = false
+			ScriptGlobal.spawn = true
+
+
+func _on_pre_Turno_timeout():
+	ScriptGlobal.preTurno=false
+	comenzoPreturno=false
+	Network.sendCambiarTurno()
+	$pre_Turno.stop()
+	print ("TERMINO EL PRE TURNO")
+	
+func comprobarDisparo():
+	if Network.last_movement_id == Network.local_player_id:
+			if ScriptGlobal.tiros > 0 && ScriptGlobal.agarroMolotov:
+				$CanvasLayer/MenuArmas/molotov.visible = true
+			else:
+				$CanvasLayer/MenuArmas/molotov.visible = false
+			if ScriptGlobal.tiros > 0 && ScriptGlobal.agarroBomba:
+				$CanvasLayer/MenuArmas/bomba.visible = true
+			else:
+				$CanvasLayer/MenuArmas/bomba.visible = false
+			if ScriptGlobal.agarroEscopeta:
+				$CanvasLayer/MenuArmas/escopeta.visible = true
+			else:
+				$CanvasLayer/MenuArmas/escopeta.visible = false
+			if ScriptGlobal.agarroBazuca && ScriptGlobal.balas > 0:
+				$CanvasLayer/MenuArmas/bazuca.visible = true
+			else:
+				$CanvasLayer/MenuArmas/bazuca.visible = false
+			match $CanvasLayer/HUD.frame:
+				0:
+					if $CanvasLayer/MenuArmas/escopeta.visible:
+						$CanvasLayer/Disparar.visible = true
+					else:
+						$CanvasLayer/Disparar.visible = false
+				1:
+					if $CanvasLayer/MenuArmas/bazuca.visible:
+						$CanvasLayer/Disparar.visible = true
+					else:
+						$CanvasLayer/Disparar.visible = false
+				2:
+					if $CanvasLayer/MenuArmas/molotov.visible:
+						$CanvasLayer/Disparar.visible = true
+					else:
+						$CanvasLayer/Disparar.visible = false
+				3:
+					if $CanvasLayer/MenuArmas/bomba.visible:
+						$CanvasLayer/Disparar.visible = true
+					else:
+						$CanvasLayer/Disparar.visible = false

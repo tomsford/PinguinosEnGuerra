@@ -23,8 +23,10 @@ var miPos=Vector2()
 var enemyPos = Vector2()
 var ready1 =false
 var ready2 =false
+var Id_enemy=0
 var posIniX=0
 var posIniY=0
+var actualizarPosTurno=false
 var dispararEnemy=false
 var armaEnemy=0
 var crearBala=false
@@ -32,6 +34,26 @@ var lineaBala
 var escalaEnemy
 var dispararBala = false
 var direccionEnemy = 0
+
+var readyMapa = false
+var readyMapa2 = false
+var crearArmas = false
+var posArmas = []
+var posArmasD = []
+var crearRegalos = false
+var posRegalos = []
+var posRegalosD = []
+
+var colorEnemy = 1
+
+####DAÑOS
+var id_lastimado=0
+var llegoDano=false
+var dano=0
+var vida_enemy=200
+var actualizar_vida_enemy=false
+
+
 
 #CLIENT FUNCTIONS
 #Cuando un cliente quiere conectarse al servidor
@@ -106,12 +128,20 @@ remotesync func _get_movement(data):
 func sendDisparo(data):
 	rpc("getDisparo",data)
 remote func getDisparo(data):
-	print("tiene q disparar enemy (network)")
-	dispararEnemy = data.disparo
-	armaEnemy = data.arma
+	if Network.last_movement_id != Network.local_player_id:
+		print("tiene q disparar enemy (network)")
+		dispararEnemy = data.disparo
+		armaEnemy = data.arma
 	
 func sendCambiarTurno():
-	rpc("cambiarTurno")
+	if get_tree().has_network_peer():
+		rpc("cambiarTurno")
+		var data = {
+			id = local_player_id,
+			posx=ScriptGlobal.posx,
+			posy=ScriptGlobal.posy
+		}
+		rpc ("get_posFija",data)
 
 remotesync func cambiarTurno():
 	var last = Network.players_IDS.find(Network.last_movement_id)
@@ -120,16 +150,73 @@ remotesync func cambiarTurno():
 	else:
 		last +=1
 	last_movement_id=Network.players_IDS[last]	 
+	ScriptGlobal.tiempoMultiJugador =20
 		
 func sendInstanciarBala(data):
 	rpc("instanciarBala",data)
 
 remote func instanciarBala(data):
+	
 	print ("instanciar bala network")
 	crearBala =true
 	lineaBala = data
-	#print("puntos en networrrrk")
-	#print(lineaBala)
-	#print("puntos data")
-	#print(data)
 	dispararBala = true
+
+func send_armas(data):
+	if get_tree().has_network_peer():
+		rpc("get_armas", data) #Call to B
+		print("entra a mandar armas")
+
+remote func get_armas(data):
+	print("llegan las armas")
+	posArmas = data.posiciones
+	posArmasD = data.posicionesD
+	crearArmas = true
+
+func send_regalos(data):
+	if get_tree().has_network_peer():
+		rpc("get_regalos", data) #Call to B
+		print("entra a mandar regalos")
+
+remote func get_regalos(data):
+	posRegalos = data.posiciones
+	posRegalosD = data.posicionesD
+	print("llegan los regalos")
+	crearRegalos = true
+remote func send_ListoMapa():
+	if get_tree().has_network_peer():
+		rpc("get_ListoMapa") #Call to B
+		
+remote func get_ListoMapa():
+	if Network.players_IDS[0] == Network.local_player_id :
+			Network.readyMapa2 = true
+	else :
+			Network.readyMapa = true
+
+func sendColor(data):
+	rpc("getColor",data)
+remote func getColor(data):
+	colorEnemy = data.color
+	ScriptGlobal.nombreEnemy = data.nombre
+
+remote func get_posFija(data):
+	Id_enemy=data.id
+	posIniX=data.posx
+	posIniY=data.posy
+	actualizarPosTurno=true
+func send_Dano(data):
+	if get_tree().has_network_peer():
+		rpc("get_dano", data) #Call to B
+remote func get_dano(data):
+	if data.id != Network.local_player_id:
+		id_lastimado=data.id
+		llegoDano=true
+		dano=data.dano
+
+func send_cambioVida(data):
+	if get_tree().has_network_peer():
+		rpc("get_cambioVida", data) #Call to B
+		
+remote func get_cambioVida(data):
+	vida_enemy=data.vida
+	actualizar_vida_enemy=true

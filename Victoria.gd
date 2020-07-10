@@ -11,6 +11,8 @@ func _physics_process(delta):
 		#Ir a la escena que llega con la familia y despues
 		#Ir a la escena que diga el puntaje final
 		ScriptGlobal.reproducirV = $AudioStreamPlayer.get_playback_position()
-		ScriptGlobal.goto_scene("res://Escenas/EscenaFinal.tscn")
-		
+		if !ScriptGlobal.LAN:
+			ScriptGlobal.goto_scene("res://Escenas/EscenaFinal.tscn")
+		else:
+			ScriptGlobal.goto_scene("res://Escenas/Menu/PantallaMenu.tscn")
 

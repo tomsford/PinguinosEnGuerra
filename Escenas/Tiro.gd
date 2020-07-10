@@ -63,7 +63,8 @@ func mover():
 	#print($Line2D.points)
 	#print("puntos en envioPuntos")
 	#print(envioPuntos)
-	Network.sendInstanciarBala(envioPuntos)
+	if Network.local_player_id == Network.last_movement_id:
+		Network.sendInstanciarBala(envioPuntos)
 	for point in $Line2D.points:
 		#contacto = $Bala.get_contacto()
 		#print(contacto)
@@ -79,9 +80,7 @@ func mover():
 		if contacto:
 			$Line2D.points = []
 			self.queue_free()
-			if ScriptGlobal.LAN:
-				get_tree().get_nodes_in_group("pinguino")[0]._disparar()
-				Network.sendCambiarTurno()
+
 
 func _physics_process(delta):
 	if Network.dispararBala:
@@ -117,7 +116,7 @@ func moverBalaEnemy(puntos):
 		if contacto:
 			puntos = []
 			self.queue_free()
-			get_tree().get_nodes_in_group("pinguino")[0]._disparar()
+			get_tree().get_nodes_in_group("enemigo")[0]._disparar()
 			
 			
 	

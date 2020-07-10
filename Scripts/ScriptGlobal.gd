@@ -39,8 +39,8 @@ var disparo = 1
 # 2 = izquierda 
 
 var vida = 200 # es para probar despues se pone en 200
-var speed = 0
-var salto = 0
+var speed = 1
+var salto = 1
 var balas = 0
 var tiros = 0
 var potenciador = 0
@@ -49,6 +49,7 @@ var tocoRegalo = false
 var actualizadoHUD = true
 var tocoArma = false
 var tocoArmaPrimeraVez = false
+var tocoArmaP =false
 
 var tiempo = 20 
 const tiempoPorNivel = 30# es para probar despues se pone en 60 o mas
@@ -57,6 +58,9 @@ var disparo_SP = false
 var velocidad = 50
 var nivel = 1
 const NIVEL_MAXIMO = 6
+
+var preTurno=false
+
 
 var apuntando = false
 
@@ -67,6 +71,20 @@ var mutePrincipal = false
 var reproducirV = 0
 
 var balaActiva = false
+var tiempoMultiJugador = 20
+
+var agarroEscopeta = false
+var agarroBazuca = false
+var agarroBomba = false
+var agarroMolotov = false
+
+##VAR MOVIMIENTO JUGADOR
+var posx=0
+var posy=0
+
+var spawn = false
+var nombreEnemy = ""
+var miNombre = ""
 
 func _ready():
 	var root = get_tree().get_root()
@@ -86,8 +104,8 @@ func _deferred_goto_scene(path):
 	get_tree().get_root().add_child(current_scene)
 	get_tree().set_current_scene(current_scene)
 
-func accionRegalo():
-	tocoRegalo = true
+func update_timeM():
+	get_tree().get_nodes_in_group("tiempo")[0].text = String(tiempoMultiJugador)
 
 func update_time():
 	get_tree().get_nodes_in_group("tiempo")[0].text = String(tiempo)
@@ -97,4 +115,5 @@ func update_puntos():
 
 func update_vida():
 	get_tree().get_nodes_in_group("vida")[0].text = String(vida)
+
 

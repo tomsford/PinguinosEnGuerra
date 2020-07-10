@@ -79,10 +79,21 @@ func _on_START_SERVER_pressed():
 	Network.call_all_peers_start()
 
 func _on_Start_Scene():
-	ScriptGlobal.goto_scene("res://Escenas/Mapa1.tscn")
+	ScriptGlobal.goto_scene("res://Escenas/EscenaSeleccion.tscn")
 	#print(get_tree().change_scene("res://Escenas/Menu/Instrucciones.tscn"))
 	ScriptGlobal.LAN =true
 
 
 func _on_BotonAtras_pressed():
 	ScriptGlobal.goto_scene("res://Escenas/Menu/PantallaMenu.tscn")
+
+
+func _on_LineEdit_text_entered(new_text):
+	$"Main Panel/VBoxContainer/HBoxContainer".visible = false
+	$"Main Panel/VBoxContainer/Create".visible = true
+	$"Main Panel/VBoxContainer/Join".visible = true
+
+
+func _on_LineEdit_text_changed(new_text):
+	ScriptGlobal.miNombre = new_text
+	print(ScriptGlobal.miNombre)

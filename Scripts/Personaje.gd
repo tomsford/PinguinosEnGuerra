@@ -20,6 +20,9 @@ var soyEnemy = false
 var ready = false
 var movimiento = Vector2()
 
+var speedBoost=1
+var jumpBoost=1
+
 var cayoEnemy = false
 var disparoBomba = false
 var cantB = 0
@@ -29,6 +32,9 @@ var balaBazuca = load("res://Escenas/BalaBazuca.tscn")
 var balaMolotov = load("res://Escenas/BalaMolotov.tscn")
 var balaBomba = load("res://Escenas/BalaBomba.tscn")
 
+func _ready():
+	if soyEnemy:
+		add_to_group("enemigo")
 
 func _physics_process(delta):
 	
@@ -40,16 +46,33 @@ func _physics_process(delta):
 	#ScriptGlobal.vida = "Vida = " + str(vida)
 	
 	if !soyEnemy :
+
+		if ScriptGlobal.spawn:
+			if position.x > 3750:
+				position.x = 6148.86
+				position.y = 464.902
+			else:
+				position.x = 50.083
+				position.y = 554.572
+			Network.sendCambiarTurno()
+			ScriptGlobal.spawn = false
+
 		if !cayo:
 			$AnimationPlayer.play("Caer")
 			cayo = true
 		
+		
+		
+		if cayo && ScriptGlobal.LAN:
+			ScriptGlobal.posx = global_position.x
+			ScriptGlobal.posy = global_position.y
+			
 		movimiento = TouchGeneral._pad()
 		if caminar && Network.last_movement_id == Network.local_player_id && ScriptGlobal.partida_ready: 
 			if(!is_on_floor()):
 				posicao.y += gravity
 			if movimiento.y < 0 and is_on_floor():
-				posicao.y = -350
+				posicao.y = -350*jumpBoost
 			if movimiento.x < 0: #izquierda
 				$Sprite.scale.x = -0.22
 				ScriptGlobal.disparo = 2
@@ -58,7 +81,7 @@ func _physics_process(delta):
 				scale.y = 0.6
 				flipeoBombas = 48
 				$AnimationPlayer.play("Nueva Animación")
-				posicao.x = movimiento.x
+				posicao.x = movimiento.x*speedBoost
 			elif movimiento.x > 0: #derecha
 				$Sprite.scale.x = 0.22
 				ScriptGlobal.disparo = 1
@@ -67,13 +90,23 @@ func _physics_process(delta):
 				scale.x = 0.6
 				scale.y = 0.6
 				$AnimationPlayer.play("Nueva Animación")
-				posicao.x = movimiento.x
+				posicao.x = movimiento.x*speedBoost
 			elif movimiento.x == 0 and movimiento.y == 0 and is_on_floor():
 				posicao.x = 0
 				posicao.y = 0
 	
 			_enviarMov() #PREGUNTAR BIEN DONDE PONERLO
 			move_and_slide(posicao,grav)
+		elif !caminar  && Network.last_movement_id != Network.local_player_id:
+			caminar=true
+			disparo=false
+			$AnimationPlayer.play("Nueva Animación")
+			if ScriptGlobal.LAN:
+				var data= {
+					disparo=false,
+					arma=0
+				}
+				Network.sendDisparo(data)
 		else:
 			if(!is_on_floor()):
 				posicao.y += gravity
@@ -88,13 +121,20 @@ func _physics_process(delta):
 			}
 			Network.send_movement(data)
 			#Network.ready1 =true
-		
+		if ScriptGlobal.tocoRegalo :
+			caminar=false
+			accionRegalo()
 	else:#maneja enemigo
 		if !cayoEnemy:
 			#print("ENTRA A CAER ENEMIGO")
 			$Sprite.frame = 24
 		if is_on_floor() && !cayoEnemy:
 			cayoEnemy = true
+		if cayoEnemy && Network.actualizarPosTurno && Network.Id_enemy==id :
+			print("actulizo la pos del enemy")
+			global_position.x = Network.posIniX
+			global_position.y = Network.posIniY
+			Network.actualizarPosTurno=false
 		if !Network.dispararEnemy :
 			posicao.x = Network.enemyPos.x
 			posicao.y = Network.enemyPos.y
@@ -130,8 +170,7 @@ func _physics_process(delta):
 		else:
 			if Network.crearBala :
 				disparoEnemigo()
-	if ScriptGlobal.tocoRegalo :
-		accionRegalo()
+	
 	
 func _input(event):
 	if event.is_action_released("lefft_mouse") && (ScriptGlobal.arma == 3 || ScriptGlobal.arma == 4) && disparoBomba == true:
@@ -146,43 +185,54 @@ func _on_explosion_cooldown_timeout():
 
 func accionRegalo():
 	print(ScriptGlobal.regalo)
-	match ScriptGlobal.regalo:
-		1:
-			print("especial")
-		2:
-			print("balas bombas")
-			tirosBombas += 3
-			ScriptGlobal.tiros += 3
-		3:
-			print("potenciador")
-			potenciador += 10 
-			ScriptGlobal.potenciador += 1 
-		4:
-			print("vida + 20")
-			vida += 20
-			ScriptGlobal.vida += 20
-		5:
-			print("vida + 10")
-			vida += 10
-			ScriptGlobal.vida += 10
-		6:
-			print("speed")
-			desplazar += 20
-			ScriptGlobal.speed += 1
-		7:
-			print("salto")
-			saltar -= 50
-			ScriptGlobal.salto += 1
-		8:
-			print("balas bazuca")
-			balasBazuca += 3
-			ScriptGlobal.balas += 3
-		9:
-			print("puente")
-	
+	if !soyEnemy :
+		print ("es mi turno actulizo HUD")
+		match ScriptGlobal.regalo:
+			1:
+				print("especial")
+				tirosBombas += 3
+				ScriptGlobal.tiros += 3
+				balasBazuca += 3
+				ScriptGlobal.balas += 3
+				vida += 20
+				ScriptGlobal.vida += 20
+			2:
+				print("balas bombas")
+				tirosBombas += 3
+				ScriptGlobal.tiros += 3
+			3:
+				print("potenciador")
+				potenciador += 10 
+				ScriptGlobal.potenciador += 1 
+			4:
+				print("vida + 20")
+				vida += 20
+				ScriptGlobal.vida += 20
+			5:
+				print("vida + 10")
+				vida += 10
+				ScriptGlobal.vida += 10
+			6:
+				print("speed")
+				speedBoost=1.25
+				ScriptGlobal.speed=1.25
+			7:
+				print("salto")
+				jumpBoost=1.2
+				ScriptGlobal.salto=1.2
+			8:
+				print("balas bazuca")
+				balasBazuca += 3
+				ScriptGlobal.balas += 3
+			9:
+				print("puente")
+		
+		
+		ScriptGlobal.actualizadoHUD = false
+		print("cambio TURNO POR EL REGALO")
+		#Network.sendCambiarTurno()
+		ScriptGlobal.preTurno=true
 	ScriptGlobal.tocoRegalo = false
-	ScriptGlobal.actualizadoHUD = false
-
 func _disparar():
 	scale.x = 0.6
 	scale.y = 0.6
@@ -230,16 +280,16 @@ func _disparar():
 			ScriptGlobal.actualizadoHUD = false
 			get_parent().add_child(newBala)
 			#Esto mas adelante no va a pasar nunca, ya que despues de disparar cambiaria el turno o habria otra senal que le deje caminar
-	elif  !caminar && !soyEnemy && Network.last_movement_id == Network.local_player_id:
-		caminar=true
-		disparo=false
-		$AnimationPlayer.play("Nueva Animación")
-		if ScriptGlobal.LAN:
-			var data= {
-				disparo=false,
-				arma=0
-			}
-			Network.sendDisparo(data)
+#	elif  !caminar && !soyEnemy && Network.last_movement_id == Network.local_player_id:
+#		caminar=true
+#		disparo=false
+#		$AnimationPlayer.play("Nueva Animación")
+#		if ScriptGlobal.LAN:
+#			var data= {
+#				disparo=false,
+#				arma=0
+#			}
+#			Network.sendDisparo(data)
 
 func _enviarMov():
 	if ready && ScriptGlobal.partida_ready :
@@ -264,35 +314,18 @@ func disparoEnemigo():
 		2:
 			newBala = balaBazuca.instance()
 			newBala.position= $Pos_Bala.global_position + Vector2(flipeo,0)
-			ScriptGlobal.balas -= 1
 			print("creo bala enemy")
 		3:
 			newBala = balaMolotov.instance()
 			newBala.position = $Pos_Bomba.global_position + Vector2(flipeoBombas,0)
-			ScriptGlobal.tiros -= 1
+
 			print("creo bala enemy")
 		4:
 			newBala = balaBomba.instance()
 			newBala.position= $Pos_Bomba.global_position + Vector2(flipeoBombas,0)
-			ScriptGlobal.tiros -= 1
 			print("creo bala enemy")
 	get_parent().add_child(newBala)
-	
-	
-	
-	#for point in Network.lineaBala:
-	#	var t = Timer.new()
-	#	t.set_wait_time(0.025)
-	#	t.set_one_shot(true)
-	#	self.add_child(t)
-	#	t.start()
-	#	yield(t, "timeout")
-	#	if !newBala.contacto:
-	#		$Bala.position = point
-	#	if newBala.contacto:
-	#		Network.lineaBala = []
-	#		self.queue_free()
-	
+
 	Network.crearBala =false
 	#Network.lineaBala= null
 	disparo =false

@@ -9,8 +9,8 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Label/AnimationPlayer.play("GameOver")
-	$Puntuacion.text = "Puntuacion Final: " + str(ScriptGlobal.puntos)
-
+	if !ScriptGlobal.LAN:
+		$Puntuacion.text = "Puntuacion Final: " + str(ScriptGlobal.puntos)
 func _physics_process(delta):
 	#$Label/AnimationPlayer.play("Presiona_para_seguir")
 	if Input.is_action_just_pressed("espacio"):
