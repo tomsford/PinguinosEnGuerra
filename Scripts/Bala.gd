@@ -15,6 +15,9 @@ func bang():
 		print ("le pegue al enemy")
 		#Network.sendCambiarTurno()
 		ScriptGlobal.preTurno=true
+	if !ScriptGlobal.LAN:
+		ScriptGlobal.disparoSinglePlayer=true
+
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
@@ -32,5 +35,60 @@ func _on_Bala_body_entered(body):
 				dano= ScriptGlobal.explosion+ScriptGlobal.potenciador
 			}
 			Network.send_Dano(data)
-
+			##DESAFIO 2 
+			if ScriptGlobal.desafio1==2 && ScriptGlobal.arma==1:
+				ScriptGlobal.danoEscopetaRecompensa+=ScriptGlobal.explosion+ScriptGlobal.potenciador
+				ScriptGlobal.update_Recompensa1(String("Progreso: "+str(ScriptGlobal.danoEscopetaRecompensa)+" /40."))
+				if ScriptGlobal.danoEscopetaRecompensa>=40 :
+					ScriptGlobal.completadoDesafio1=true
+			elif ScriptGlobal.desafio2==2 && ScriptGlobal.arma==1:
+				ScriptGlobal.danoEscopetaRecompensa+=ScriptGlobal.explosion+ScriptGlobal.potenciador
+				ScriptGlobal.update_Recompensa2(String("Progreso: "+str(ScriptGlobal.danoEscopetaRecompensa)+" /40."))
+				if ScriptGlobal.danoEscopetaRecompensa>=40 :
+					ScriptGlobal.completadoDesafio2=true
+			##DESAFIO 3
+			if ScriptGlobal.desafio1==3:
+				ScriptGlobal.turnosDanados+=1
+				ScriptGlobal.update_Recompensa1(String("Progreso: "+str(ScriptGlobal.turnosDanados)+" /2."))
+				print ("turnos dañados",ScriptGlobal.turnosDanados)
+				if ScriptGlobal.turnosDanados==2:
+					ScriptGlobal.completadoDesafio1=true
+			elif ScriptGlobal.desafio2==3:
+				ScriptGlobal.turnosDanados+=1
+				ScriptGlobal.update_Recompensa2(String("Progreso: "+str(ScriptGlobal.turnosDanados)+" /2."))
+				if ScriptGlobal.turnosDanados==2:
+					ScriptGlobal.completadoDesafio2=true
+					
+			##DESAFIO 6
+			if ScriptGlobal.desafio1==6 && ScriptGlobal.arma==3:
+				ScriptGlobal.danoMolotovRecompensa+=ScriptGlobal.explosion+ScriptGlobal.potenciador
+				ScriptGlobal.update_Recompensa1(String("Progreso: "+str(ScriptGlobal.danoMolotovRecompensa)+" /80."))
+				if ScriptGlobal.danoMolotovRecompensa>=80 :
+					ScriptGlobal.completadoDesafio1=true
+			elif ScriptGlobal.desafio2==6 && ScriptGlobal.arma==3:
+				ScriptGlobal.danoMolotovRecompensa+=ScriptGlobal.explosion+ScriptGlobal.potenciador
+				ScriptGlobal.update_Recompensa2(String("Progreso: "+str(ScriptGlobal.danoMolotovRecompensa)+" /80."))
+				if ScriptGlobal.danoMolotovRecompensa>=80 :
+					ScriptGlobal.completadoDesafio2=true
+			
+			##DESAFIO 8
+			if ScriptGlobal.desafio1==8 && ScriptGlobal.arma==2:
+				ScriptGlobal.danoBazucaRecompensa+=ScriptGlobal.explosion+ScriptGlobal.potenciador
+				ScriptGlobal.update_Recompensa1(String("Progreso: "+str(ScriptGlobal.danoBazucaRecompensa)+" /60."))
+				if ScriptGlobal.danoBazucaRecompensa>=60 :
+					ScriptGlobal.completadoDesafio1=true
+			elif ScriptGlobal.desafio2==8 && ScriptGlobal.arma==2:
+				ScriptGlobal.danoBazucaRecompensa+=ScriptGlobal.explosion+ScriptGlobal.potenciador
+				ScriptGlobal.update_Recompensa2(String("Progreso: "+str(ScriptGlobal.danoBazucaRecompensa)+" /60."))
+				if ScriptGlobal.danoBazucaRecompensa>=60 :
+					ScriptGlobal.completadoDesafio2=true
+				
+		elif Network.local_player_id== Network.last_movement_id:
+			if ScriptGlobal.turnosDanados>0 : 
+				ScriptGlobal.turnosDanados-=1
+				if ScriptGlobal.desafio1==3:
+					ScriptGlobal.update_Recompensa1(String("Progreso: "+str(ScriptGlobal.turnosDanados)+" /2."))
+				elif ScriptGlobal.desafio2==3:
+					ScriptGlobal.update_Recompensa2(String("Progreso: "+str(ScriptGlobal.turnosDanados)+" /2."))
+					
 	bang()

@@ -58,17 +58,19 @@ var disparo_SP = false
 var velocidad = 50
 var nivel = 1
 const NIVEL_MAXIMO = 6
+var disparoSinglePlayer=true
 
 var preTurno=false
-
 
 var apuntando = false
 
 var reproducir = 0
 var reproducir2 = 0
+var reproducirMultijugador=0
 var mute = false
 var mutePrincipal = false
 var reproducirV = 0
+var muteMultijugador=false
 
 var balaActiva = false
 var tiempoMultiJugador = 20
@@ -85,6 +87,21 @@ var posy=0
 var spawn = false
 var nombreEnemy = ""
 var miNombre = ""
+
+##RECOMPENSAS
+
+var desafio1=0
+var desafio2=0
+var completadoDesafio1=false
+var completadoDesafio2=false
+var cantRegalosRecompensa=0
+var danoEscopetaRecompensa=0
+var turnosDanados=0
+var danoMolotovRecompensa=0
+var cantidadSaltosRecompensa=0
+var danoBazucaRecompensa=0
+
+
 
 func _ready():
 	var root = get_tree().get_root()
@@ -116,4 +133,9 @@ func update_puntos():
 func update_vida():
 	get_tree().get_nodes_in_group("vida")[0].text = String(vida)
 
+func update_Recompensa1(data):
+	get_tree().get_nodes_in_group("recompensa")[0].text = String(data)
+
+func update_Recompensa2(data):
+	get_tree().get_nodes_in_group("recompensa")[1].text = String(data)
 

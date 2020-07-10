@@ -54,8 +54,10 @@ func _physics_process(delta):
 			else:
 				position.x = 50.083
 				position.y = 554.572
-			Network.sendCambiarTurno()
+			ScriptGlobal.preTurno=true
 			ScriptGlobal.spawn = false
+			if ScriptGlobal.turnosDanados>0 :
+				ScriptGlobal.turnosDanados-=1
 
 		if !cayo:
 			$AnimationPlayer.play("Caer")
@@ -72,7 +74,21 @@ func _physics_process(delta):
 			if(!is_on_floor()):
 				posicao.y += gravity
 			if movimiento.y < 0 and is_on_floor():
-				posicao.y = -350*jumpBoost
+				posicao.y = -350*ScriptGlobal.salto
+				if ScriptGlobal.desafio1==7 &&  !ScriptGlobal.completadoDesafio1:
+					if ScriptGlobal.cantidadSaltosRecompensa<100:
+						ScriptGlobal.cantidadSaltosRecompensa+=1
+						ScriptGlobal.update_Recompensa1(String("Progreso: "+str(ScriptGlobal.cantidadSaltosRecompensa)+" /100."))
+					if ScriptGlobal.cantidadSaltosRecompensa>=100 :
+						ScriptGlobal.completadoDesafio1=true
+				if ScriptGlobal.desafio2==7 && !ScriptGlobal.completadoDesafio2 :
+					if ScriptGlobal.cantidadSaltosRecompensa<100:
+						ScriptGlobal.cantidadSaltosRecompensa+=1
+						ScriptGlobal.update_Recompensa2(String("Progreso: "+str(ScriptGlobal.cantidadSaltosRecompensa)+" /100."))
+					if ScriptGlobal.cantidadSaltosRecompensa>=100 :
+						ScriptGlobal.completadoDesafio2=true
+						
+						
 			if movimiento.x < 0: #izquierda
 				$Sprite.scale.x = -0.22
 				ScriptGlobal.disparo = 2
@@ -81,7 +97,7 @@ func _physics_process(delta):
 				scale.y = 0.6
 				flipeoBombas = 48
 				$AnimationPlayer.play("Nueva Animación")
-				posicao.x = movimiento.x*speedBoost
+				posicao.x = movimiento.x*ScriptGlobal.speed
 			elif movimiento.x > 0: #derecha
 				$Sprite.scale.x = 0.22
 				ScriptGlobal.disparo = 1
@@ -203,7 +219,7 @@ func accionRegalo():
 			3:
 				print("potenciador")
 				potenciador += 10 
-				ScriptGlobal.potenciador += 1 
+				ScriptGlobal.potenciador += 20
 			4:
 				print("vida + 20")
 				vida += 20
@@ -224,14 +240,30 @@ func accionRegalo():
 				print("balas bazuca")
 				balasBazuca += 3
 				ScriptGlobal.balas += 3
-			9:
-				print("puente")
 		
 		
 		ScriptGlobal.actualizadoHUD = false
 		print("cambio TURNO POR EL REGALO")
 		#Network.sendCambiarTurno()
 		ScriptGlobal.preTurno=true
+		
+		##DESAFIO 1 
+		if ScriptGlobal.desafio1==1:
+			ScriptGlobal.cantRegalosRecompensa+=1
+			var data=String("Progreso: " + str(ScriptGlobal.cantRegalosRecompensa) +" /3.")
+			ScriptGlobal.update_Recompensa1(data)
+		elif ScriptGlobal.desafio2==1:
+			ScriptGlobal.cantRegalosRecompensa+=1
+			var data=String("Progreso: " + str(ScriptGlobal.cantRegalosRecompensa) + " /3.")
+			ScriptGlobal.update_Recompensa2(data)
+		if ScriptGlobal.cantRegalosRecompensa==3 && ScriptGlobal.desafio1==1:
+			ScriptGlobal.completadoDesafio1=true
+		elif ScriptGlobal.cantRegalosRecompensa==3 && ScriptGlobal.desafio2==1:
+			ScriptGlobal.completadoDesafio2=true
+		
+		## DESAFIO 2
+		if ScriptGlobal.turnosDanados>0 :
+				ScriptGlobal.turnosDanados-=1
 	ScriptGlobal.tocoRegalo = false
 func _disparar():
 	scale.x = 0.6

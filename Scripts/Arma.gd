@@ -23,10 +23,28 @@ func _on_Arma_body_entered(body):
 				3: 
 					ScriptGlobal.agarroMolotov = true
 					ScriptGlobal.tiros +=2
+					#DESAFIO 5
+					if ScriptGlobal.desafio1==5:
+						ScriptGlobal.completadoDesafio1=true
+						var data=String("Completo la recoleccion de molotovs: 1/1")
+						ScriptGlobal.update_Recompensa1(data)
+					if ScriptGlobal.desafio2==5:
+						ScriptGlobal.completadoDesafio2=true
+						var data=String("Completo la recoleccion de molotovs: 1/1")
+						ScriptGlobal.update_Recompensa2(data)
 					
 				4:
 					ScriptGlobal.agarroBomba = true
 					ScriptGlobal.tiros +=2
+					#DESAFIO 4
+					if ScriptGlobal.desafio1==4:
+						ScriptGlobal.completadoDesafio1=true
+						var data=String("Completo la recoleccion de bombas: 1/1")
+						ScriptGlobal.update_Recompensa1(data)
+					if ScriptGlobal.desafio2==4:
+						ScriptGlobal.completadoDesafio2=true
+						var data=String("Completo la recoleccion de bombas 1/1")
+						ScriptGlobal.update_Recompensa2(data)
 					
 			ScriptGlobal.explosion = tamanoExplosion
 			ScriptGlobal.tocoArma = true

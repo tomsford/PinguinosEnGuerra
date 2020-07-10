@@ -28,10 +28,12 @@ func _physics_process(delta):
 			get_tree().get_nodes_in_group("recargar")[0].play()
 		$AnimationPlayer.play("Sacar_escopeta")
 		armapordefecto = false
-	if Input.is_action_pressed("lefft_mouse") and is_on_floor() and !ScriptGlobal.apuntando:
-			if dispararApretado: 
-				_disparar()
-				dispararApretado = false
+#	if Input.is_action_pressed("lefft_mouse") and is_on_floor() and !ScriptGlobal.apuntando && ScriptGlobal.disparoSinglePlayer :
+#			#if dispararApretado: 
+#			_disparar()
+#			#	dispararApretado = false
+	if !ScriptGlobal.disparoSinglePlayer:
+		_disparar()
 
 func _derecha():
 	print("derecha")
@@ -53,7 +55,7 @@ func _saltar():
 		move_and_slide(posicao,grav)
 
 func _disparar():
-		if not cooldown:
+		#if not cooldown:
 			cooldown = true
 			$explosion_cooldown.start()
 			var newBala = null
@@ -72,3 +74,4 @@ func _disparar():
 						newBala = balaBomba.instance()
 						newBala.position= $Pos_Bomba.global_position + Vector2(flipeoBombas,0)
 				get_parent().add_child(newBala)
+				ScriptGlobal.balaActiva=true

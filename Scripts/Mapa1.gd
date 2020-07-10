@@ -40,6 +40,11 @@ var numerosRegalosD = []
 var setTimer=false
 var comenzoPreturno=false
 
+###Desafios
+var finDesafio1=false
+var findesafio2=false
+
+
 var posicionesArmas = { #Armas izquierda
 						"a" : Vector2(1311.225,295.707),
 						"b" : Vector2(1576.033,295.891),
@@ -89,13 +94,25 @@ var posicionesRegalosD = {
 						"m" : Vector2(3438.263,134.452)}
 
 func _ready():
-	$CanvasLayer/HUD_Enemy/nombreEne.text = ScriptGlobal.nombreEnemy
+	#$CanvasLayer/HUD_Enemy/nombreEne.text = ScriptGlobal.nombreEnemy
 	if Network.players_IDS[0] != Network.local_player_id:
 		$RigidBody2D.scale.x = -1
 		$RigidBody2D.position.x = 6750.701
 		$ControlListo.rect_position.x = 5120
 		$ControlEsperando.rect_position.x = 5120
-
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var eleccion1=rng.randi_range(1,8)
+	var eleccion2=rng.randi_range(1,8)
+	while eleccion1==eleccion2:
+		eleccion2= rng.randi_range(1,8)
+	ScriptGlobal.desafio1=eleccion1
+	ScriptGlobal.desafio2=eleccion2
+	print("random 1", eleccion1)
+	print("random 2", eleccion2)
+	if ScriptGlobal.desafio1 !=0 && ScriptGlobal.desafio2!=0:
+		establecer_Objetivos(eleccion1,eleccion2)
+	
 func _physics_process(delta):
 	
 	var mob
@@ -103,6 +120,8 @@ func _physics_process(delta):
 	if ScriptGlobal.LAN && ScriptGlobal.tiempoMultiJugador == 0 && Network.last_movement_id==Network.local_player_id && !ScriptGlobal.preTurno:
 		ScriptGlobal.preTurno=true
 		print ("SE TERMINO EL TIEMPO, CAMBIA TURNO")
+		if ScriptGlobal.turnosDanados>0 :
+				ScriptGlobal.turnosDanados-=1
 		#Network.sendCambiarTurno()
 		
 	if Network.llegoDano:
@@ -191,6 +210,8 @@ func _physics_process(delta):
 		print ("CREE ENEMIGO CON POSICION en Y:")
 		print (Network.posIniY)
 		ScriptGlobal.partida_ready = true
+		$CanvasLayer/HUD_Enemy/nombreEne.text = String("Enemigo: "+str(ScriptGlobal.nombreEnemy))
+		print("Mi enemigo es: ",ScriptGlobal.nombreEnemy)
 	if ScriptGlobal.LAN && ScriptGlobal.partida_ready :
 		if !setTimer:
 			print("ARRANCA EL TIEMPO")
@@ -204,7 +225,175 @@ func _physics_process(delta):
 			CamaraGeneral.cambioTurno(get_tree().get_nodes_in_group("camara")[2])
 		$CanvasLayer/TurnoSprite.visible = true
 		
-
+	if ScriptGlobal.completadoDesafio1 && !finDesafio1:
+		establecer_Recompensas1(ScriptGlobal.desafio1)
+		
+	
+	if ScriptGlobal.completadoDesafio2 && !findesafio2:
+		establecer_Recompensas2(ScriptGlobal.desafio2)
+func establecer_Recompensas1(a):
+		match a:
+			1:
+				print("especial")
+				ScriptGlobal.tiros += 3
+				ScriptGlobal.balas += 3
+				ScriptGlobal.vida += 20
+				$CanvasLayer/objetivo1.text=String("Objetivo completado")
+				$CanvasLayer/recompensa1.visible=false
+			2:
+				print("balas bombas")
+				ScriptGlobal.tiros += 3
+				$CanvasLayer/objetivo1.text=String("Objetivo completado")
+				$CanvasLayer/recompensa1.visible=false
+			3:
+				print("potenciador")
+				ScriptGlobal.potenciador += 1 
+				$CanvasLayer/objetivo1.text=String("Objetivo completado")
+				$CanvasLayer/recompensa1.visible=false
+			4:
+				print("vida + 20")
+				ScriptGlobal.vida += 20
+				$CanvasLayer/objetivo1.text=String("Objetivo completado")
+				$CanvasLayer/recompensa1.visible=false
+			5:
+				print("vida + 10")
+				ScriptGlobal.vida += 10
+				$CanvasLayer/objetivo1.text=String("Objetivo completado")
+				$CanvasLayer/recompensa1.visible=false
+			6:
+				print("speed")
+				ScriptGlobal.speed=1.25
+				$CanvasLayer/objetivo1.text=String("Objetivo completado")
+				$CanvasLayer/recompensa1.visible=false
+			7:
+				print("salto")
+				ScriptGlobal.salto=1.2
+				$CanvasLayer/objetivo1.text=String("Objetivo completado")
+				$CanvasLayer/recompensa1.visible=false
+			8:
+				print("balas bazuca")
+				ScriptGlobal.balas += 3
+				$CanvasLayer/objetivo1.text=String("Objetivo completado")
+				$CanvasLayer/recompensa1.visible=false
+		ScriptGlobal.completadoDesafio1=false
+		ScriptGlobal.actualizadoHUD=false
+		finDesafio1=true
+func establecer_Recompensas2(a):
+		match a:
+			1:
+				print("especial")
+				ScriptGlobal.tiros += 3
+				ScriptGlobal.balas += 3
+				ScriptGlobal.vida += 20
+				$CanvasLayer/objetivo2.text=String("Objetivo completado")
+				$CanvasLayer/recompensa2.visible=false
+			2:
+				print("balas bomba")
+				ScriptGlobal.tiros += 3
+				$CanvasLayer/objetivo2.text=String("Objetivo completado")
+				$CanvasLayer/recompensa2.visible=false
+			3:
+				print("potenciador")
+				ScriptGlobal.potenciador += 1 
+				$CanvasLayer/objetivo2.text=String("Objetivo completado")
+				$CanvasLayer/recompensa2.visible=false
+			4:
+				print("vida + 20")
+				ScriptGlobal.vida += 20
+				$CanvasLayer/objetivo2.text=String("Objetivo completado")
+				$CanvasLayer/recompensa2.visible=false
+			5:
+				print("vida + 10")
+				ScriptGlobal.vida += 10
+				$CanvasLayer/objetivo2.text=String("Objetivo completado")
+				$CanvasLayer/recompensa2.visible=false
+			6:
+				print("speed")
+				ScriptGlobal.speed=1.25
+				$CanvasLayer/objetivo2.text=String("Objetivo completado")
+				$CanvasLayer/recompensa2.visible=false
+			7:
+				print("salto")
+				ScriptGlobal.salto=1.2
+				$CanvasLayer/objetivo2.text=String("Objetivo completado")
+				$CanvasLayer/recompensa2.visible=false
+			8:
+				print("balas bazuca")
+				ScriptGlobal.balas += 3
+				$CanvasLayer/objetivo2.text=String("Objetivo completado")
+				$CanvasLayer/recompensa2.visible=false
+		ScriptGlobal.completadoDesafio2=false
+		ScriptGlobal.actualizadoHUD=false
+		findesafio2=true
+func establecer_Objetivos(a,b):
+		match a:
+			1:
+				$CanvasLayer/objetivo1.text=String("Agarrar 3 regalos. Recompensa: Balas multiples y vida")
+				var data=String("Progreso: " + str(ScriptGlobal.cantRegalosRecompensa) +" /3.")
+				ScriptGlobal.update_Recompensa1(data)
+			2:
+				$CanvasLayer/objetivo1.text=String("Hacer 40 daño con escopeta. Recompensa: Balas bombas")
+				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /40.")
+				ScriptGlobal.update_Recompensa1(data)
+			3:
+				$CanvasLayer/objetivo1.text=String("Dañar 2 turnos seguidos al enemigo. Recompensa:Potenciador de daño.")
+				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /2.")
+				ScriptGlobal.update_Recompensa1(data)
+			4:
+				$CanvasLayer/objetivo1.text=String("Agarrar una bomba del suelo . Recompensa: Mas vida")
+				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /1.")
+				ScriptGlobal.update_Recompensa1(data)
+			5:
+				$CanvasLayer/objetivo1.text=String("Agarrar una molotov. Recompensa: Un poco de vida")
+				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /1.")
+				ScriptGlobal.update_Recompensa1(data)
+			6:
+				$CanvasLayer/objetivo1.text=String("Hacer 80 de daño con Molotov . Recompensa: Mas velocidad")
+				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /80.")
+				ScriptGlobal.update_Recompensa1(data)
+			7:
+				$CanvasLayer/objetivo1.text=String("Saltar 100 veces. Recompensa: Saltar mas alto")
+				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /100.")
+				ScriptGlobal.update_Recompensa1(data)
+			8:
+				$CanvasLayer/objetivo1.text=String("Hacer 60 de daño con bazuca . Recompensa: Mas balas bazuca")
+				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /60.")
+				ScriptGlobal.update_Recompensa1(data)
+		match b:
+			1:
+				$CanvasLayer/objetivo2.text=String("Agarrar 3 regalos. Recompensa: Balas multiples y vida")
+				var data=String("Progreso: " + str(ScriptGlobal.cantRegalosRecompensa) +" /3.")
+				ScriptGlobal.update_Recompensa2(data)
+			2:
+				$CanvasLayer/objetivo2.text=String("Hacer 40 daño con escopeta. Recompensa: Balas bombas")
+				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /40.")
+				ScriptGlobal.update_Recompensa2(data)
+			3:	
+				$CanvasLayer/objetivo2.text=String("Dañar 2 turnos seguidos al enemigo. Recompensa: Potenciador de disparo")
+				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /2.")
+				ScriptGlobal.update_Recompensa2(data)
+			4:
+				$CanvasLayer/objetivo2.text=String("Agarrar una bomba del suelo . Recompensa: Mas vida")
+				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /1.")
+				ScriptGlobal.update_Recompensa2(data)
+			5:
+				$CanvasLayer/objetivo2.text=String("Agarrar una molotov. Recompensa: Un poco de vida")
+				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /1.")
+				ScriptGlobal.update_Recompensa2(data)
+			6:
+				$CanvasLayer/objetivo2.text=String("Hacer 80 de daño con Molotov . Recompensa: Mas velocidad")
+				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /80.")
+				ScriptGlobal.update_Recompensa2(data)
+			7:
+				$CanvasLayer/objetivo2.text=String("Saltar 100 veces. Recompensa: Saltar mas alto")
+				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /100.")
+				ScriptGlobal.update_Recompensa2(data)
+			8:
+				$CanvasLayer/objetivo2.text=String("Hacer 60 de daño con bazuca . Recompensa: Mas balas bazuca")
+				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /60.")
+				ScriptGlobal.update_Recompensa2(data)
+		
+	
 func setearArmas():
 	var newArma
 	var random
@@ -785,3 +974,13 @@ func comprobarDisparo():
 						$CanvasLayer/Disparar.visible = true
 					else:
 						$CanvasLayer/Disparar.visible = false
+
+
+func _on_sonido_pressed():
+		if !ScriptGlobal.muteMultijugador:
+			ScriptGlobal.reproducirMultijugador = $MusicaFondo.get_playback_position()
+			$MusicaFondo.stop()
+			ScriptGlobal.muteMultijugador= true
+		else:
+			$MusicaFondo.play(ScriptGlobal.reproducirMultijugador)
+			ScriptGlobal.muteMultijugador= false

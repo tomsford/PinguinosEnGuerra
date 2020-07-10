@@ -23,7 +23,8 @@ func _ready():
 	var data = 1
 	newEnemy.spawn = 1
 	newEnemy.direccion(data)
-	
+	ScriptGlobal.disparoSinglePlayer=true
+	ScriptGlobal.balaActiva=false
 #FUNCION SIN TOCAR ABAJO DEL TODO COMENTADA
 
 func _physics_process(delta):
@@ -32,6 +33,10 @@ func _physics_process(delta):
 		print("muerto")
 		get_tree().paused = false
 		ScriptGlobal.goto_scene("res://Escenas/GameOver.tscn")
+	if !ScriptGlobal.disparoSinglePlayer:
+		$CanvasLayer/Disparar.visible=false
+	else:
+		$CanvasLayer/Disparar.visible=true
 
 func _on_Derecha_pressed():
 	$Pinguino._derecha()
@@ -43,7 +48,9 @@ func _on_Saltar_pressed():
 	$Pinguino._saltar()
 
 func _on_Disparar_pressed():
-	$Pinguino.dispararApretado = true
+	#$Pinguino.dispararApretado = true
+	ScriptGlobal.disparoSinglePlayer=false
+	
 #	if(ScriptGlobal.tocoArma == true):
 #		$Pinguino._disparar()
 
