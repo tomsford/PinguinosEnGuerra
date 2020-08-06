@@ -16,9 +16,4 @@ func _ready():
 #	pass
 
 
-func _on_LimiteIzq_body_entered(body):
-	
 
-
-func _on_LimiteDer_body_entered(body):
-	pass # Replace with function body.

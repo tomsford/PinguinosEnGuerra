@@ -101,6 +101,7 @@ var danoMolotovRecompensa=0
 var cantidadSaltosRecompensa=0
 var danoBazucaRecompensa=0
 
+var mostrarDisparo = false
 
 
 func _ready():

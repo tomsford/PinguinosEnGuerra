@@ -145,8 +145,8 @@ func set_strength(num):
 	strength = num
 	clamp(strength,0.0,100.0)
 	
-	if $Pivot/TextureProgress:
-		$Pivot/TextureProgress.value = num
+#	if $Pivot/TextureProgress:
+#		$Pivot/TextureProgress.value = num
 	
 	calculate_trajectory()
 

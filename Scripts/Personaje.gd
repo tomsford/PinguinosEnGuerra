@@ -287,7 +287,7 @@ func _disparar():
 				arma = ScriptGlobal.arma
 			}
 			Network.sendDisparo(data)
-		if not cooldown:
+		if not cooldown && is_on_floor():
 			cooldown = true
 			$explosion_cooldown.start()
 			var newBala

@@ -332,11 +332,11 @@ func establecer_Objetivos(a,b):
 				var data=String("Progreso: " + str(ScriptGlobal.cantRegalosRecompensa) +" /3.")
 				ScriptGlobal.update_Recompensa1(data)
 			2:
-				$CanvasLayer/objetivo1.text=String("Hacer 40 daño con escopeta. Recompensa: Balas bombas")
+				$CanvasLayer/objetivo1.text=String("Hacer 40 dano con escopeta. Recompensa: Balas bombas")
 				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /40.")
 				ScriptGlobal.update_Recompensa1(data)
 			3:
-				$CanvasLayer/objetivo1.text=String("Dañar 2 turnos seguidos al enemigo. Recompensa:Potenciador de daño.")
+				$CanvasLayer/objetivo1.text=String("Danar 2 turnos seguidos al enemigo. Recompensa:Potenciador de dano.")
 				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /2.")
 				ScriptGlobal.update_Recompensa1(data)
 			4:
@@ -348,7 +348,7 @@ func establecer_Objetivos(a,b):
 				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /1.")
 				ScriptGlobal.update_Recompensa1(data)
 			6:
-				$CanvasLayer/objetivo1.text=String("Hacer 80 de daño con Molotov . Recompensa: Mas velocidad")
+				$CanvasLayer/objetivo1.text=String("Hacer 80 de dano con Molotov . Recompensa: Mas velocidad")
 				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /80.")
 				ScriptGlobal.update_Recompensa1(data)
 			7:
@@ -356,7 +356,7 @@ func establecer_Objetivos(a,b):
 				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /100.")
 				ScriptGlobal.update_Recompensa1(data)
 			8:
-				$CanvasLayer/objetivo1.text=String("Hacer 60 de daño con bazuca . Recompensa: Mas balas bazuca")
+				$CanvasLayer/objetivo1.text=String("Hacer 60 de dano con bazuca . Recompensa: Mas balas bazuca")
 				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /60.")
 				ScriptGlobal.update_Recompensa1(data)
 		match b:
@@ -365,11 +365,11 @@ func establecer_Objetivos(a,b):
 				var data=String("Progreso: " + str(ScriptGlobal.cantRegalosRecompensa) +" /3.")
 				ScriptGlobal.update_Recompensa2(data)
 			2:
-				$CanvasLayer/objetivo2.text=String("Hacer 40 daño con escopeta. Recompensa: Balas bombas")
+				$CanvasLayer/objetivo2.text=String("Hacer 40 dano con escopeta. Recompensa: Balas bombas")
 				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /40.")
 				ScriptGlobal.update_Recompensa2(data)
 			3:	
-				$CanvasLayer/objetivo2.text=String("Dañar 2 turnos seguidos al enemigo. Recompensa: Potenciador de disparo")
+				$CanvasLayer/objetivo2.text=String("Danar 2 turnos seguidos al enemigo. Recompensa: Potenciador de disparo")
 				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /2.")
 				ScriptGlobal.update_Recompensa2(data)
 			4:
@@ -381,7 +381,7 @@ func establecer_Objetivos(a,b):
 				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /1.")
 				ScriptGlobal.update_Recompensa2(data)
 			6:
-				$CanvasLayer/objetivo2.text=String("Hacer 80 de daño con Molotov . Recompensa: Mas velocidad")
+				$CanvasLayer/objetivo2.text=String("Hacer 80 de dano con Molotov . Recompensa: Mas velocidad")
 				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /80.")
 				ScriptGlobal.update_Recompensa2(data)
 			7:
@@ -389,7 +389,7 @@ func establecer_Objetivos(a,b):
 				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /100.")
 				ScriptGlobal.update_Recompensa2(data)
 			8:
-				$CanvasLayer/objetivo2.text=String("Hacer 60 de daño con bazuca . Recompensa: Mas balas bazuca")
+				$CanvasLayer/objetivo2.text=String("Hacer 60 de dano con bazuca . Recompensa: Mas balas bazuca")
 				var data=String("Progreso: " + str(ScriptGlobal.danoEscopetaRecompensa) +" /60.")
 				ScriptGlobal.update_Recompensa2(data)
 		

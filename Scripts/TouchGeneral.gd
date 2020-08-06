@@ -9,5 +9,5 @@ func _disparo():
 	get_tree().get_nodes_in_group("pinguino")[0]._disparar()
 
 func _pad():
-	var posicion = get_tree().get_nodes_in_group("pad")[0].get_value() * 100
+	posicion = get_tree().get_nodes_in_group("pad")[0].get_value() * 100
 	return posicion

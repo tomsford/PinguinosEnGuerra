@@ -28,6 +28,9 @@ func _ready():
 #FUNCION SIN TOCAR ABAJO DEL TODO COMENTADA
 
 func _physics_process(delta):
+	
+	
+	
 	if ScriptGlobal.vida <= 0:
 		get_tree().paused = true
 		print("muerto")
@@ -36,7 +39,11 @@ func _physics_process(delta):
 	if !ScriptGlobal.disparoSinglePlayer:
 		$CanvasLayer/Disparar.visible=false
 	else:
-		$CanvasLayer/Disparar.visible=true
+		if ScriptGlobal.mostrarDisparo:
+			$CanvasLayer/Disparar.visible = true
+		else:
+			$CanvasLayer/Disparar.visible = false
+		#$CanvasLayer/Disparar.visible=true
 
 func _on_Derecha_pressed():
 	$Pinguino._derecha()

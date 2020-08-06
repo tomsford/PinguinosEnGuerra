@@ -46,7 +46,7 @@ var posRegalosD = []
 
 var colorEnemy = 1
 
-####DAÑOS
+####DAnOS
 var id_lastimado=0
 var llegoDano=false
 var dano=0
@@ -153,7 +153,8 @@ remotesync func cambiarTurno():
 	ScriptGlobal.tiempoMultiJugador =20
 		
 func sendInstanciarBala(data):
-	rpc("instanciarBala",data)
+	if ScriptGlobal.LAN:
+		rpc("instanciarBala",data)
 
 remote func instanciarBala(data):
 	

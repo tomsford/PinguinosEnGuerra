@@ -50,7 +50,7 @@ func _on_Bala_body_entered(body):
 			if ScriptGlobal.desafio1==3:
 				ScriptGlobal.turnosDanados+=1
 				ScriptGlobal.update_Recompensa1(String("Progreso: "+str(ScriptGlobal.turnosDanados)+" /2."))
-				print ("turnos dañados",ScriptGlobal.turnosDanados)
+				print ("turnos danados",ScriptGlobal.turnosDanados)
 				if ScriptGlobal.turnosDanados==2:
 					ScriptGlobal.completadoDesafio1=true
 			elif ScriptGlobal.desafio2==3:

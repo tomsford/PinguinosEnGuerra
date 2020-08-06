@@ -7,7 +7,7 @@
 [ext_resource path="res://Escenas/Menu/Botones/Jugar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/PantallaMenu.gd" type="Script" id=6]
 [ext_resource path="res://Recursos/fondos/FondoMenu.png" type="Texture" id=7]
-[ext_resource path="res://Recursos/BGM/Arex's Beat.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Recursos/BGM/ArexsBeat.ogg" type="AudioStream" id=8]
 [ext_resource path="res://Escenas/Menu/Botones/BotonTiendaOnline.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFontData" id=1]

@@ -33,6 +33,9 @@ margin_bottom = 57.5
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 0.737255, 0.109804, 1 )
 text = "ESPACIO PUBLICITARIO"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0

@@ -18,6 +18,11 @@ func _physics_process(delta):
 	posicao.x = 0
 	posicao.y += gravity
 	
+	if is_on_floor():
+		ScriptGlobal.mostrarDisparo = true
+	else: 
+		ScriptGlobal.mostrarDisparo = false
+	
 	move_and_slide(posicao,grav)
 	if armapordefecto:
 		ScriptGlobal.tocoArma = true

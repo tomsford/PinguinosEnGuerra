@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/derrota.wav-7e8153f60337818cf571a4ca2bba1374.sample"
+
+[deps]
+
+source_file="res://Recursos/BGM/derrota.wav"
+dest_files=[ "res://.import/derrota.wav-7e8153f60337818cf571a4ca2bba1374.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
